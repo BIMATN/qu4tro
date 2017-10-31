@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS `burgers_db` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE burgers_db;
+
+CREATE TABLE IF NOT EXISTS `burgers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `burger_name` varchar(255) NOT NULL,
+  `devoured` tinyint(1) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
