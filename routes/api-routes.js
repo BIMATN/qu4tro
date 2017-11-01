@@ -1,78 +1,67 @@
-// *****************************************************************************
-// **** api-routes.js - this file offers a set of routes for displaying and
-// saving data to the db
-// ******************************************************************************
-// *** Dependencies
+// *********************************************************************************
+// api-routes.js - this file offers a set of routes for displaying and saving data to the db
+// *********************************************************************************
+
+// Dependencies
+// =============================================================
 
 // Requiring our models
 var db = require("../models");
 
-// Routes =============================================================
+// Routes
+// =============================================================
 module.exports = function(app) {
-  // GET route for getting all of the burgers
-  app.get("/" || "/api/burgers", function(req, res) {
+
+  // goes to home page for login
+  app.get("/", function(req, res) {
+      res.render("index");
+  });
+
+  // GET route for getting all of the questions in db or all questions for quiz id passed
+  app.get("/api/quiz/:id?", function(req, res) {
     var query = {};
-
-    // findAll returns all burger entries when used with no options
-    db.Burger.findAll({
-      include:[db.Customer]   
-    }).then(function(dbBurger) {
-        db.Customer.findAll({}).then(function(dbCustomer) {
-              var hbsObject = {
-                burgers: dbBurger,
-                customers: dbCustomer,
-              };
-              // We have access to the burgers as an argument inside of the callback function
-              res.render("index", hbsObject); 
-        });
-    })
-
-  });
-
-  // POST route for saving a new burger
-  app.post("/api/burgers", function(req, res) {
-    db.Burger.create(req.body).then(function(dbBurger) {
-      res.json(dbBurger);
+    if (req.params.id) {
+      query.QuizId = req.params.id;
+    }
+    // Here we add an "include" property to our options in our findAll query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Author
+    db.Question.findAll({
+      where: query,
+      include: [db.Quiz]
+    }).then(function(dbQuestion) {
+      res.json(dbQuestion);
     });
-
   });
 
-  // DELETE route for deleting burgers. We can get the id of the burger to be deleted
-  // from req.params.id
-  app.delete("/api/burgers/:id", function(req, res) {
-    // Destroy takes in one argument: a "where object describing the burgers we want to destroy
-    db.Burger.destroy({
+  // POST route for saving a new Question
+  app.post("/api/question", function(req, res) {
+    db.Question.create(req.body).then(function(dbPost) {
+      res.json(dbQuestion);
+    });
+  });
+
+  // DELETE route for deleting posts
+  app.delete("/api/question/:id", function(req, res) {
+    db.Question.destroy({
       where: {
         id: req.params.id
       }
-    })
-    .then(function(dbBurger) {
-      res.json(dbBurger);
+    }).then(function(dbQuestion) {
+      res.json(dbQuestion);
     });
-
   });
 
-  // PUT route for updating burgers. We can get the updated burger data from req.body
-  app.put("/api/burgers", function(req, res) {
-    var newBody = req.body;    
- 
-    if (!req.body.CustomerId){
-      newBody = {
-        id: req.body.id,
-        devoured: req.body.id
-      }
-    console.log("***>>" + JSON.stringify(newBody) + "<<***");         
-    }
-    db.Burger.update(
-       newBody,
+  // PUT route for updating posts
+  app.put("/api/posts", function(req, res) {
+    db.Question.update(
+      req.body,
       {
         where: {
           id: req.body.id
         }
-    }).then(function(dbBurger) {
-        res.json(dbBurger);
-    });
-
-  });  
+      }).then(function(dbQuestion) {
+        res.json(dbQuestion);
+      });
+  });
 };
- 

@@ -2,14 +2,14 @@
   "development": {
     "username": "root",
     "password": "Hawaii50",
-    "database": "burgers_db",
+    "database": "quatro_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "Hawaii50",
-    "database": "burgers_db",
+    "database": "quatro_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
