@@ -4,24 +4,14 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
-var env       = process.env.JAWSB_URL || 'test';
+var env       = process.env.JAWSB_URL || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  // var sequelize = new Sequelize(config.database.developement, config.username, config.password, config);
-  var sequelize = new Sequelize(config.database, config.username, config.password, {
-    host: "localhost",
-    dialect: "mysql",
-    logging: function () {},
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-});
+  var sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs
