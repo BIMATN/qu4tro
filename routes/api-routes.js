@@ -12,20 +12,13 @@ var db = require("../models");
 // =============================================================
 module.exports = function(app) {
 
-  // goes to home page for login
-  app.get("/", function(req, res) {
-      res.render("index");
-  });
-
   // GET route for getting all of the questions in db or all questions for quiz id passed
   app.get("/api/quiz/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
       query.QuizId = req.params.id;
     }
-    // Here we add an "include" property to our options in our findAll query
-    // We set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.Author
+
     db.Question.findAll({
       where: query,
       include: [db.Quiz]
@@ -34,9 +27,29 @@ module.exports = function(app) {
     });
   });
 
+  // GET route for getting all of the questions for a userid passed
+  app.get("/api/quizzes/:id?", function(req, res) {
+    var query = {};
+    if (req.params.id) {
+      query.id = req.params.id;
+    }
+
+    db.Quiz.findAll({
+      where: query,
+      include: [db.User]
+    }).then(function(dbQuestion) {
+      res.json(dbQuestion);
+    });
+  });  
+
   // POST route for saving a new Question
   app.post("/api/question", function(req, res) {
-    db.Question.create(req.body).then(function(dbPost) {
+    db.Question.create({
+      question: req.body.question,
+      answer: req.body.answer,
+      category: req.body.category,
+      quizId:quizId
+    }).then(function(dbPost) {
       res.json(dbQuestion);
     });
   });
@@ -53,7 +66,7 @@ module.exports = function(app) {
   });
 
   // PUT route for updating posts
-  app.put("/api/posts", function(req, res) {
+  app.put("/api/question", function(req, res) {
     db.Question.update(
       req.body,
       {

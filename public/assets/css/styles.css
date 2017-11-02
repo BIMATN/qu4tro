@@ -12,11 +12,6 @@ li {
 .form-group {
   margin-bottom: 5px;
 }
-.burgerPic, figure{
-	width: 125px; !important
-	height: 125px;
-	border-radius: 50px;	
-}
 
 button:hover, .btn:hover{
 	cursor: pointer;
@@ -30,5 +25,5 @@ button:hover, .btn:hover{
 	color: #428bca;	
 }
 .logo{
-	width: 50%;
+	width: 30%;
 }
