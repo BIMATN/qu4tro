@@ -1,0 +1,8 @@
+<div class="m-2">
+		<select name="customerID" id="customerID">
+		 <option value=0>select customer</option>		
+		{{#each customers}}
+		  <option value="{{dataValues.id}}">{{dataValues.customer_name}}</option>
+		{{/each }}
+		</select>
+</div>
