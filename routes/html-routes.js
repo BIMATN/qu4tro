@@ -14,10 +14,12 @@ module.exports = function(app) {
     db.User.findAll({
       where: query,
     }).then(function(dbUser) {
-
-// **************** error checks need to go here ***********
-
-			res.sendFile(path.join(__dirname, '../public/home.html'));
+      // **************** error checks need to go here ***********
+      if (!dbUser){
+        throw new Error("invalid login");
+      } else{
+			   res.sendFile(path.join(__dirname, '../public/home.html'));
+      }
     });
   });
 
