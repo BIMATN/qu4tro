@@ -5,7 +5,7 @@ module.exports = function(app) {
 
   // goes to home page when accessing home page of site
   app.get("/", function(req, res) {
-      res.render("index");
+    res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
   // when authenticating userName and password passed, if successful, route to home page else error
@@ -38,15 +38,25 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
-  // blog route loads blog.html
-  app.get("/quiz", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/quiz.html"));
-  });
-
-  // // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
-  // app.get("/quiz/:id?", function(req, res){
-  //   var filePath = path.join(__dirname,"../public/quiz.html");
-  //   res.sendFile(filePath);
+  // route loads quiz.html
+  // app.get("/quiz", function(req, res) {
+  //   res.sendFile(path.join(__dirname, "../public/quiz.html"));
   // });
+
+  // route loads survey.html
+  app.get("/survey", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/survey.html"));
+  });  
+
+  // route loads survey.html
+  app.get("/apiInfo", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/apiInfo.html"));
+  });    
+
+  // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
+  app.get("/quiz/:id?", function(req, res){
+    var filePath = path.join(__dirname,"../public/quiz.html");
+    res.sendFile(filePath);
+  });
 
 };
