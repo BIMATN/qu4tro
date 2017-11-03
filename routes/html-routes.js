@@ -4,7 +4,7 @@ var db = require("../models");
 module.exports = function(app) {
 
   // goes to home page when accessing home page of site
-  app.get("/", function(req, res) {("home")
+  app.get("/", function(req, res) {
       res.render("index");
   });
 
@@ -25,33 +25,28 @@ module.exports = function(app) {
       if (!dbUser){
         throw new Error("invalid login");
       } else{
-          
-        res.sendFile(path.join(__dirname,"../public/cms.html"));     // gets all the way to here but doesn't update page
+        var filePath = path.join(__dirname,"../public/cms.html");
+        console.log(filePath);
+
+        res.sendFile(filePath);     // gets all the way to here but doesn't update page
       }
     });
   });
 
-  // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
-  app.get("/quiz/", function(req, res){
-        res.sendFile(path.join(__dirname,"../public/quiz.html"));      
+  // cms route loads cms.html
+  app.get("/cms", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/cms.html"));
   });
 
-
-  // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
-  app.get("/quiz/:id?", function(req, res){
-
-    var query = {};
-    if (req.params.quizId) {
-      query.QuizId = req.params.quizId;
-    }
-
-    db.Question.findAll({
-      where: query,
-      include: [db.Quiz]
-    }).then(function(dbQuestion) {
-		    res.render("quiz");
-    });  	
-
+  // blog route loads blog.html
+  app.get("/quiz", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/quiz.html"));
   });
+
+  // // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
+  // app.get("/quiz/:id?", function(req, res){
+  //   var filePath = path.join(__dirname,"../public/quiz.html");
+  //   res.sendFile(filePath);
+  // });
 
 };
