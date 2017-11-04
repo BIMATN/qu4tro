@@ -9,26 +9,24 @@ module.exports = function(app) {
   });
 
   // when authenticating userName and password passed, if successful, route to home page else error
-  app.get("/authenticate", function(req, res) {
-    console.log(req.body);
+  // use post here to "hide" values passed back to route.
+  app.post("/authenticate", function(req, res) {
     var query = {};
     if (req.body.userName && req.body.password) {
-      query.userName= req.body.userName,
-      query.password = req.body.password;
+      query = { user_name : req.body.userName,
+                password : req.body.password };
     }
 
     db.User.findAll({
-      where: query,
-    }).then(function(dbUser) {
-      // **************** error checks need to go here ***********
-
-      if (!dbUser){
+      where:query
+    }).then(function(data) {
+      console.log("data : " + JSON.stringify(data));
+      //console.log("user_name : " + data[0].user_name);      
+      if (!data || !data.length){
         throw new Error("invalid login");
       } else{
         var filePath = path.join(__dirname,"../public/cms.html");
-        console.log(filePath);
-
-        res.sendFile(filePath);     // gets all the way to here but doesn't update page
+        res.sendFile(filePath);
       }
     });
   });
@@ -39,9 +37,9 @@ module.exports = function(app) {
   });
 
   // route loads quiz.html
-  // app.get("/quiz", function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/quiz.html"));
-  // });
+  app.get("/quiz", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/quiz.html"));
+  });
 
   // route loads survey.html
   app.get("/survey", function(req, res) {
@@ -54,9 +52,9 @@ module.exports = function(app) {
   });    
 
   // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
-  app.get("/quiz/:id?", function(req, res){
-    var filePath = path.join(__dirname,"../public/quiz.html");
-    res.sendFile(filePath);
-  });
+  // app.get("/quiz/:id?", function(req, res){
+  //   var filePath = path.join(__dirname,"../public/quiz.html");
+  //   res.sendFile(filePath);
+  // });
 
 };
