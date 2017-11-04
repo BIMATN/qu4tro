@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+  <head>
+    <meta charset='UTF-8'>
+    <title>Quattro</title>
+  
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' integrity='sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7' crossorigin='anonymous'>
+  </head>
+
+  <body>
+      
+    <div class='container'>
+      
+      <div class='jumbotron'>
+        <div class='container'>
+          <h1>Quattro</h1>
+         <p></p>
+          <h2>9 questions</h2>
+          <p></p>
+          <medium>What comes after 0?</medium>
+          <p></p>
+          <medium>What does Lil Wayne carry in his back pocket?</medium>
+          <p></p>
+          <medium>What is three minus two?</medium>
+          <p></p>
+          <medium>Skip to my....?</medium>
+          <p></p>
+           <medium>What comes after 0?</medium>
+          <p></p>
+          <medium>What does Lil Wayne carry in his back pocket?</medium>
+          <p></p>
+          <medium>What is three minus two?</medium>
+          <p></p>
+          <medium>Skip to my....?</medium>
+
+
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-lg-12'>
+          
+          <div class='panel panel-default'>
+            <div class='panel-heading'>
+              <h3 class='panel-title'><strong>Word to Guess</strong></h3>
+            </div>
+            <div class='panel-body'>
+              
+              <h3 id='word-blanks'></h3>
+            </div>
+          </div>
+         
+          <div class='panel panel-default'>
+            <div class='panel-body'>
+              
+              <strong>Wrong Guesses: </strong> <span id='wrong-guesses'></span>
+            </div>
+          </div>
+   
+          <div class='panel panel-default'>
+            <div class='panel-body'>
+              
+              <strong>Guesses Left: </strong> <span id='guesses-left'>9</span>
+            </div>
+          </div>
+
+          <div class='panel panel-default'>
+            <div class='panel-body'>
+            
+              <strong>Correct: </strong> <span id='win-counter'>0</span>
+            </div>
+          </div>
+         
+          <div class='panel panel-default'>
+            <div class='panel-body'>
+             
+              <strong>Wrong: </strong> <span id='loss-counter'>0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <script>
+      var wordsList = ["one", "neena", "two", "lou", "three", "jordan",
+  "four", "stephen", "five", "adam", "six", "luis"];
+
+var chosenWord = "";
+
+var lettersInChosenWord = [];
+
+var numBlanks = 0;
+
+var blanksAndSuccesses = [];
+
+var wrongGuesses = [];
+
+var letterGuessed = "";
+
+var winCorrect = 0;
+var losswrong = 0;
+var numGuesses = 9;
+
+function startGame() {
+  
+  numGuesses = 9;
+
+  chosenWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+  
+  lettersInChosenWord = chosenWord.split("");
+ 
+  numBlanks = lettersInChosenWord.length;
+  
+  console.log(chosenWord);
+  
+  blanksAndSuccesses = [];
+  
+  wrongGuesses = [];
+  
+  for (var i = 0; i < numBlanks; i++) {
+    blanksAndSuccesses.push("_");
+  }
+
+  console.log(blanksAndSuccesses);
+  
+
+  document.getElementById("correct").innerHTML = blanksAndSuccesses.join(" ");
+  
+  document.getElementById("wrong").innerHTML = wrongGuesses.join(" ");
+}
+
+function checkLetters(letter) {
+  
+  var correctWord = false;
+  
+  for (var i = 0; i < numBlanks; i++) {
+    if (chosenWord[i] === letter) {
+     
+      wordInWord = true;
+    }
+  }
+  
+  if (wordInWord) {
+
+    for (var j = 0; j < numBlanks; j++) {
+      
+      if (chosenWord[j] === letter) {
+  
+        blanksAndSuccesses[j] = letter;
+      }
+    }
+    
+    console.log(blanksAndSuccesses);
+  }
+  
+  else {
+
+    wrongGuesses.push(word);
+   
+    numGuesses--;
+  }
+}
+
+function roundComplete() {
+  
+  console.log("WinCount: " + winCounter + " | LossCount: " + lossCounter + " | NumGuesses: " + numGuesses);
+
+  document.getElementById("attempt").innerHTML = numGuesses;
+  =
+  document.getElementById("correct").innerHTML = blanksAndSuccesses.join(" ");
+
+  document.getElementById("wrong").innerHTML = wrongGuesses.join(" ");
+ 
+  if (wordsInChosenWord.toString() === blanksAndSuccesses.toString()) {
+
+    winCounter++;
+   
+    alert("You win!");
+
+    document.getElementById("correct").innerHTML = winCounter;
+   
+    startGame();
+  }
+
+  else if (numGuesses === 0) {
+    
+    lossCounter++;
+  
+    alert("incorrect");
+   
+    document.getElementById("incorrect").innerHTML = lossCounter;
+    
+    startGame();
+  }
+}
+
+startGame();
+
+document.onkeyup = function(event) {
+
+  letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+
+  checkLetters(letterGuessed);
+  
+  roundComplete();
+};
+    </script>
+  </body>
+</html>
