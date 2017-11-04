@@ -6,4 +6,4 @@ VALUES ("What is bootstrap?", "A responsive CSS framework", "web", 1),
 ("What is the root of 144?", "12", "math", 2),
 ("Who was Luke Skywalker's father?", "Annakin Skywalker", "trivia", 4);
 
-SELECT * from questions;
+SELECT * FROM questions;
