@@ -5,7 +5,8 @@ module.exports = function(app) {
 
   // goes to home page when accessing home page of site
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
+    /*res.sendFile(path.join(__dirname, "../public/index.html"));*/
+    res.render("index-b");
   });
 
   // when authenticating userName and password passed, if successful, route to home page else error
@@ -25,30 +26,35 @@ module.exports = function(app) {
       if (!data || !data.length){
         throw new Error("invalid login");
       } else{
-        var filePath = path.join(__dirname,"../public/cms.html");
-        res.sendFile(filePath);
+       /* var filePath = path.join(__dirname,"../public/cms.html");
+        res.sendFile(filePath);*/
+        res.render("cms");
       }
     });
   });
 
-  // cms route loads cms.html
+  // cms route loads cms.handlebars
   app.get("/cms", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/cms.html"));
+    /*res.sendFile(path.join(__dirname, "../public/cms.html"));*/
+    res.render("cms");
   });
 
-  // route loads quiz.html
+  // route loads quiz.handlebars
   app.get("/quiz", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/quiz.html"));
+    /*res.sendFile(path.join(__dirname, "../public/quiz.html"));*/
+    res.render("quiz-b");
   });
 
-  // route loads survey.html
+  // route loads quiz.handlebars
   app.get("/survey", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/survey.html"));
+    /*res.sendFile(path.join(__dirname, "../public/survey.html"));*/
+    res.render("quiz-b");
   });  
 
-  // route loads survey.html
+  // route loads apiInfo.handlebars informational page on how to use our API
   app.get("/apiInfo", function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/apiInfo.html"));
+    /*res.sendFile(path.join(__dirname, "../public/apiInfo.html"));*/
+    res.render("apiInfo");
   });    
 
   // when passed quizID, find the questions and route to quiz.handlebars to handle quiz taking
