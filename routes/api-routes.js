@@ -27,13 +27,12 @@ module.exports = function(app) {
     });
   });
 
-  // GET route for getting all of the questions for a userid passed
+  // GET route for getting all of the quizzes for a userid passed
   app.get("/api/quizzes/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
       query.id = req.params.id;
     }
-
     db.Quiz.findAll({
       where: query,
       include: [db.User]
