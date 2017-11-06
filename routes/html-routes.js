@@ -14,10 +14,22 @@ module.exports = function(app) {
     res.render("cms");
   });
 
+  app.get("/viewQuizzes", function(req,res){
+    res.render("viewQuizzes");
+  });
 
+  app.get("/createQuizzes", function(req,res){
+    res.render("createQuizzes");
+  });
 
-  // route loads quiz.handlebars
+  // route loads quiz-b.handlebars survey page
   app.get("/survey/:id?", function(req, res) {
+    // res.sendFile(path.join(__dirname, "../public/survey.html"));
+    res.render("quiz-b");
+  });
+
+    // route loads quiz-b.handlebars quiz page
+  app.get("/quiz/:id?", function(req, res) {
     // res.sendFile(path.join(__dirname, "../public/survey.html"));
     res.render("quiz-b");
   });  

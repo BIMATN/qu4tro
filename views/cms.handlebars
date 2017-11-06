@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center align-items-center">
     <img class="logo" src = "/assets/img/quatro_logo.png">
   </div>
-  <p class="lead text-center">You've got questions, you've got answers</p>
+  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
   <hr class="my-4">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- <a class="navbar-brand" href="/">Home</a> -->
@@ -12,13 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home<!-- <span class="sr-only">(current)</span> --></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/test">Take A Test</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/quiz">Take A Quiz</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/survey">Take A Survey</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/apiInfo">API Information</a>
@@ -26,35 +26,34 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li> -->
+        <form class="form-inline my-2 my-lg-0 mr-auto">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, User</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/cms">Sign Out</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/cantDoThatHaHa">Un-Register</a>
+          </div>
+        </li>
+      </ul>
     </div>
   </nav>
 </div>
 <div class="container" style="border: 2px red solid">
   <div class="row">
-    <div class="col-6 d-flex justify-content-center">
-      <a class="nav-link" href="/viewTests"><button type="button" class="btn-lg btn-info justify-content-center">View Tests</button></a>
+    <div class="col-4 d-flex justify-content-center">
+      <a class="nav-link" href="/createQuizzes"><button type="button" class="btn-lg btn-info justify-content-center">Create A Quiz</button></a>
     </div>
-    <div class="col-6 d-flex justify-content-center">
-      <a class="nav-link" href="/createTests"><button type="button" class="btn-lg btn-info justify-content-center">Create A Test</button></a>
+    <div class="col-4 d-flex justify-content-center">
+      <a class="nav-link" href="/viewQuizzes"><button type="button" class="btn-lg btn-info justify-content-center">View Quizzes</button></a>
+    </div>
+    <div class="col-4 d-flex justify-content-center">
+      <a class="nav-link" href="/viewResults"><button type="button" class="btn-lg btn-info justify-content-center">Analyze Results</button></a>
     </div>
   </div>
 </div> <!-- container -->
