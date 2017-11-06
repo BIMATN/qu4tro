@@ -45,13 +45,6 @@ $(document).ready(function() {
           console.log(err);
         }
     });
-
-    // $.get("/authenticate/", User, function(data) {
-    //   if (data) {
-    //     // If this user exists, send to cms.html
-    //    window.location.href = "/cms";
-    //   }
-    // });
   }
 
 });

@@ -15,21 +15,7 @@ module.exports = function(app) {
     res.render("cms");
   });
 
-  // route loads quiz.handlebars
-  app.get("/quiz/:id?", function(req, res) {
-    var query = {};
-    if (req.params.id) {
-      query.QuizId = req.params.id;
-    }
 
-    db.Question.findAll({
-      where: query,
-      include: [db.Quiz]
-    }).then(function(dbQuestion) {
-      console.log(dbQuestion[0].Question);
-      res.render("quiz", {question: dbQuestion});
-    });
-  });
 
   // route loads quiz.handlebars
   app.get("/survey/:id?", function(req, res) {

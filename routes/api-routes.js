@@ -30,7 +30,7 @@ module.exports = function(app) {
   app.get("/api/user/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
-      query.userId = req.params.id;
+      query.id = req.params.id;
     }
 
     db.User.findAll({
@@ -116,4 +116,20 @@ module.exports = function(app) {
       }
     });
   });
+
+  // route loads quiz.handlebars
+  app.post("/quiz", function(req, res) {
+    var query = {};
+    if (req.body.quizId) {
+      query.QuizId = req.body.quizId;
+    }
+
+    db.Question.findAll({
+      where: query,
+      include: [db.Quiz]
+    }).then(function(dbQuestion) {
+      console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
+      res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name});
+    });
+  });  
 };

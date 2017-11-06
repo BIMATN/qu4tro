@@ -51,13 +51,13 @@
 
 <div class="container">
     <h1 class="text-center"></h1>
-    Quiz "{{question.dataValues.Question.name}}""
+    Quiz "{{quiz_name}}"
     <div class="row">
-     <ul>
-        {{#each question}}
-          <li>Q: {{this.dataValues.Question}}</li>
+     <ol>
+        {{#each dbQuestion}}
+          <li>: {{this.dataValues.Question}} </li>
         {{/each }}
-    </ul>
+    </ol>
     </div>
 
 </div> <!-- container -->
