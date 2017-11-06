@@ -13,7 +13,7 @@ var db = require("../models");
 module.exports = function(app) {
 
   // GET route for getting all of the questions in db or all questions for quiz id passed
-  app.get("/api/quiz/:id?", function(req, res) {
+  app.get("/api/quiz/:id?", function(req, res, next) {
     var query = {};
     if (req.params.id) {
       query.QuizId = req.params.id;
@@ -26,6 +26,23 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
+
+  app.get("/api/user/:id?", function(req, res) {
+    var query = {};
+    if (req.params.id) {
+      query.userId = req.params.id;
+    }
+
+    db.User.findAll({
+      where: query,
+      include: [db.Quiz]
+    }).then(function(dbQuizId) {
+      console.log(dbQuizId);
+      res.json(dbQuizId);
+    });
+  });
+
+
 
   // GET route for getting all of the questions for a userid passed
   app.get("/api/quizzes/:id?", function(req, res) {

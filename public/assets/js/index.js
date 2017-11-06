@@ -39,7 +39,6 @@ $(document).ready(function() {
     })
     .done(function(err, data) {
         if (data){
-
           window.location.href = "/cms";          
         }
         else{
