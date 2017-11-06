@@ -50,7 +50,6 @@ module.exports = function(app) {
     if (req.params.id) {
       query.id = req.params.id;
     }
-
     db.Quiz.findAll({
       where: query,
       include: [db.User]

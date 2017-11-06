@@ -49,12 +49,13 @@
   </nav>
 </div>
 <div class="container" style="border: 2px red solid">
-  <div class="row">
-    <div class="col-6 d-flex justify-content-center">
-      <a class="nav-link" href="/viewTests"><button type="button" class="btn-lg btn-info justify-content-center">View Tests</button></a>
-    </div>
-    <div class="col-6 d-flex justify-content-center">
-      <a class="nav-link" href="/createTests"><button type="button" class="btn-lg btn-info justify-content-center">Create A Test</button></a>
-    </div>
-  </div>
+  <ul>
+    {{#each}}
+        <div class = "d-flex justify-content-center">
+          <li>
+             {{this.test_name}} <button type="button" class="btn btn-info btn-sm" data-id = {{this.id}}>Edit Test</button>
+          </li>
+        </div>
+    {{/each}}
+  </ul>
 </div> <!-- container -->
