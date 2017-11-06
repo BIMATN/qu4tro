@@ -48,15 +48,16 @@
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
-        <div class="card-header text-center">Every quiz needs a name, start yours by choosing one!</div>
+        <div class="card-header text-center">Great Job! Now for the questions!</div>
         <div class="card-body text-center">
-          <h4 class="card-title">Quiz Creator</h4>
+          <h4 class="card-title">A Tale of Two Cities</h4>
+          <div id="questions"></div>
           <form id="form" method="post" action="/api/">
             <div class="form-group col-12 mx-auto">
-               <label for="quizName">Please Enter a Quiz Name</label>
+               <label for="quizName">Please Enter Your First Question</label>
                <textarea class="form-control" id="name" rows="1" type="text" placeholder="e.g. A Tale of Two Cities"></textarea>
             </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Add Question</button>
           </form>
         </div>
       </div>

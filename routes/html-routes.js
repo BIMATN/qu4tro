@@ -22,6 +22,14 @@ module.exports = function(app) {
     res.render("createQuizzes");
   });
 
+  app.get("/questionMaker", function(req,res){
+    res.render("questionMaker");
+  });
+
+  app.get("/answers", function(req,res){
+    res.render("answers");
+  });
+
   // route loads quiz-b.handlebars survey page
   app.get("/survey/:id?", function(req, res) {
     // res.sendFile(path.join(__dirname, "../public/survey.html"));
