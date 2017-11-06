@@ -112,7 +112,7 @@ module.exports = function(app) {
       } else{
        /* var filePath = path.join(__dirname,"../public/cms.html");
         res.sendFile(filePath);*/
-        res.render("cms");
+        res.render("cms",{user_name: data[0].user_name});
       }
     });
   });
@@ -120,16 +120,19 @@ module.exports = function(app) {
   // route loads quiz.handlebars
   app.post("/quiz", function(req, res) {
     var query = {};
+
     if (req.body.quizId) {
       query.QuizId = req.body.quizId;
+      db.Question.findAll({
+        where: query,
+        include: [db.Quiz]
+      }).then(function(dbQuestion) {
+        // console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
+        res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name});
+      });
+    } else{
+      res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again"});
     }
 
-    db.Question.findAll({
-      where: query,
-      include: [db.Quiz]
-    }).then(function(dbQuestion) {
-      console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
-      res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name});
-    });
   });  
 };

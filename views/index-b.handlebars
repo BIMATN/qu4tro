@@ -55,6 +55,8 @@
           <div class="text-center"><h5>Login<h5></div>
 
             <nav class="navbar navbar-light bg-faded">
+            {{#if loginError}}<div class="bg-danger p-2 center-block">{{loginError}}</div>
+                  {{/if}}
               <form id="login" action="/authenticate" method="POST">
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
@@ -73,17 +75,20 @@
         </div>
         <div class="col-md-6 col-lg-6">
             <div class="text-center"><h5>Take Quiz<h5></div>
-            <nav class="navbar navbar-light bg-faded">
+            <div class="well">
               <form id="takeQuiz" action="/quiz" method="POST">
+                  {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
+                  {{/if}}                
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">ID</span>
                     <input type="text" class="form-control" placeholder="quiz id" aria-describedby="basic-addon1" id="quizId" name="quizId">
+                    <input type="hidden" name="pageName" value="index-b">
                   </div>
                   <div class="d-flex justify-content-center mt-4">     
                     <button type="submit" class="btn btn-primary ">Enter</button> 
                   </div>   
               </form>
-            </nav>  
+            </div>  
                      
         </div>
 
