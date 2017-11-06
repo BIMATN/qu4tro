@@ -18,7 +18,6 @@ module.exports = function(app) {
     if (req.params.id) {
       query.QuizId = req.params.id;
     }
-
     db.Question.findAll({
       where: query,
       include: [db.Quiz]
@@ -26,13 +25,12 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
-
+//GET for what???
   app.get("/api/user/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
       query.id = req.params.id;
     }
-
     db.User.findAll({
       where: query,
       include: [db.Quiz]
@@ -41,9 +39,6 @@ module.exports = function(app) {
       res.json(dbQuizId);
     });
   });
-
-
-
   // GET route for getting all of the questions for a userid passed
   app.get("/api/quizzes/:id?", function(req, res) {
     var query = {};
@@ -57,7 +52,6 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });  
-
   // POST route for saving a new Question
   app.post("/api/question", function(req, res) {
     db.Question.create({
@@ -101,7 +95,6 @@ module.exports = function(app) {
       query = { user_name : req.body.userName,
                 password : req.body.password };
     }
-
     db.User.findAll({
       where:query
     }).then(function(data) {
@@ -133,6 +126,5 @@ module.exports = function(app) {
     } else{
       res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again"});
     }
-
   });  
 };
