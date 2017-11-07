@@ -92,8 +92,7 @@ module.exports = function(app) {
         } else{
          /* var filePath = path.join(__dirname,"../public/cms.html");
           res.sendFile(filePath);*/
-          res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name});
-          response.json(data);
+          res.render("cms",{userName: data[0].user_name, userId: data[0].id});
         }
       });
     } else {
