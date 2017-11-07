@@ -1,4 +1,6 @@
 $(function(){
-	sessionStorage.setItem("userName", $("#navbarDropdown").data("username").val().trim());
-	sessionStorage.setItem("userId", $("#navbarDropdown").data("userid").val().trim());
+	let name = $("#navbarDropdown").data("username");
+	let id = $("#navbarDropdown").data("userid");
+	sessionStorage.setItem("userName", name);
+	sessionStorage.setItem("userId", id);
 })
