@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "zV0zNQ15Mu26",
+    "password": "Hawaii50",
     "database": "quatro_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "l00wcy9nhkcwjn00",
-    "password": "jd10k3kaop5xj507",
-    "database": "yj6axny4l2gy4wjo",
-    "host": "wftuqljwesiffol6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "w203xb69vwnzlazc",
+    "password": "n4864tyuekp2rngc",
+    "database": "al0n1bf95sgl0esz",
+    "host": "a07yd3a6okcidwap.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
