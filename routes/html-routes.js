@@ -38,8 +38,25 @@ module.exports = function(app) {
   });
 
   // route loads quiz-b.handlebars survey page
-  app.get("/survey", function(req, res) {
-    res.render("survey");
+  app.post("/survey", function(req, res) {
+    var query = {};
+    if (req.body.surveyId) {
+      query = { SurveyId : req.body.surveyId};
+      db.SurveyQuestion.findAll({
+        where:query,
+        include: [db.Survey]
+      }).then(function(data) {
+        console.log("data : " + JSON.stringify(data));
+        //console.log("user_name : " + data[0].user_name);      
+        if (!data || !data.length){
+          res.render("survey",{loginError: "Incorrect survey id"});
+        } else{
+          res.render("survey",{dbQuestion: data, survey_name:data[0].Survey.survey_name});
+        }
+      });
+    } else {
+      res.render("survey",{loginError: "Incorrect survey id"});
+    }    
   });
 
     // route loads quiz-b.handlebars quiz page
@@ -72,7 +89,6 @@ module.exports = function(app) {
         //console.log("user_name : " + data[0].user_name);      
         if (!data || !data.length){
           res.render("index",{loginError: "incorrect Username and/or password"});
-          // throw new Error("invalid login");
         } else{
          /* var filePath = path.join(__dirname,"../public/cms.html");
           res.sendFile(filePath);*/

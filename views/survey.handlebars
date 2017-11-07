@@ -79,17 +79,21 @@
                 <div class="panel-heading">
                   <li><h3 class="panel-title">{{this.dataValues.Question}}</h3>
                 </div>
-                <div class="panel-body">
-                    <label class="radio-inline"
-                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">>unlikely 
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">no opinion
-                    </label>
-                    <label class="radio-inline">
-                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">likely
-                    </label>
-                </div>
+                    <div class="panel-body">                
+                        {{#if this.dataValues.Category == "scale"}}
+                          <div class="card">
+                            <label class="radio-inline"
+                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">unlikely 
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">no opinion
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">likely
+                            </label>
+                          </div>
+                        {{/if}}
+                    </div>
                 <div class="panel-footer" style="display: none" id="answer-{{id}}"><i>{{this.dataValues.Answer}}</i></div>
               </div>            
             {{/each }}
