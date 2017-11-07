@@ -51,25 +51,22 @@
       <h1 class="text-center"></h1>
       <div class="row">
         <div class="col-md-6 col-lg-6" style="border-right: solid;" >
-          <div class="text-center"><h5>Login<h5></div>
-            <nav class="navbar navbar-light bg-faded">
-            {{#if loginError}}<div class="bg-danger p-2 center-block">{{loginError}}</div>
+          <div class="d-flex justify-content-center"><h5>Login<h5></div>
+            <!-- <nav class="navbar navbar-light bg-faded"> -->
+            {{#if loginError}}<div class="bg-danger p-2 d-flex justify-content-center">{{loginError}}</div>
                   {{/if}}
-              <form id="login" action="/authenticate" method="POST">
+              <form class="d-flex justify-content-center" id="login" action="/authenticate" method="POST">
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
                     <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="userName" id="userName">
                   </div>
-
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">P</span>
                     <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1" name="password" id="password">
                   </div>  
-                  <div class="d-flex justify-content-center mt-4">     
-                    <button type="submit" class="btn btn-primary">login</button>   
-                  </div> 
+                  <button type="submit" class="btn btn-primary">Login</button>
               </form>
-            </nav>            
+            <!-- </nav>  -->           
         </div>
         <div class="col-md-6 col-lg-6">
             <div class="text-center"><h5>Take Quiz<h5></div>
