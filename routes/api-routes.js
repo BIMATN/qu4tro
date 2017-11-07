@@ -25,7 +25,8 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
-//GET for what???
+
+  // GET route for getting quizzes for userid 
   app.get("/api/user/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
@@ -39,7 +40,10 @@ module.exports = function(app) {
       res.json(dbQuizId);
     });
   });
-  // GET route for getting all of the questions for a userid passed
+
+
+
+  // GET route for getting all of the quizzes for a userid passed
   app.get("/api/quizzes/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
@@ -63,7 +67,8 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
-  // DELETE route for deleting posts
+
+  // DELETE route for deleting questions
   app.delete("/api/question/:id", function(req, res) {
     db.Question.destroy({
       where: {
@@ -73,7 +78,8 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });
-  // PUT route for updating posts
+
+  // PUT route for updating questions
   app.put("/api/question", function(req, res) {
     db.Question.update(
       req.body,
@@ -85,4 +91,47 @@ module.exports = function(app) {
         res.json(dbQuestion);
       });
   });
+
+  // when authenticating userName and password passed, if successful, route to home page else error
+  // use post here to "hide" values passed back to route.
+  app.post("/authenticate", function(req, res) {
+    var query = {};
+    if (req.body.userName && req.body.password) {
+      query = { user_name : req.body.userName,
+                password : req.body.password };
+    }
+
+    db.User.findAll({
+      where:query
+    }).then(function(data) {
+      console.log("data : " + JSON.stringify(data));
+      //console.log("user_name : " + data[0].user_name);      
+      if (!data || !data.length){
+        throw new Error("invalid login");
+      } else{
+       /* var filePath = path.join(__dirname,"../public/cms.html");
+        res.sendFile(filePath);*/
+        res.render("cms",{user_name: data[0].user_name});
+      }
+    });
+  });
+
+
+  // route loads quiz.handlebars
+  app.post("/quiz", function(req, res) {
+    var query = {};
+
+    if (req.body.quizId) {
+      query.QuizId = req.body.quizId;
+      db.Question.findAll({
+        where: query,
+        include: [db.Quiz]
+      }).then(function(dbQuestion) {
+        // console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
+        res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name, quizId:dbQuestion[0].Quiz.id});
+      });
+    } else{
+      res.render(req.body.pageName, {quizIdError: "Enter Quiz ID."});
+    }
+  });  
 };

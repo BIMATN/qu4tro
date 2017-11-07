@@ -29,4 +29,24 @@ button:hover, .btn:hover{
 }
 .jumbotron{
   color:white;
+  line-height: .75;
+  padding: 2rem; !important
+}
+.navbar{
+  padding: 2px;!important
+}
+.card, .panel, .well{
+  box-shadow: 0 4px 8px 0 #afd9ee, 0 6px 20px 0 #afd9ee;  
+}
+.well{
+  margin: 5px;
+}
+a.disabled {
+   cursor:not-allowed;
+   color: gray;
+ }   
+.profilepic{
+  height: auto;
+  width: 200px;
+  border-radius: 50%;
 }

@@ -4,36 +4,97 @@
   </div>
   <p class="lead text-center">You've got questions, you've got answers</p>
   <hr class="my-4">
-      <nav class="navbar navbar-toggleable-md navbar-light" style="background-color: #e3f2fd;">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/quiz">Take Quiz</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" href="#">Take Survey</a>
-            </li>  
-            <li class="nav-item">
-              <a class="nav-link" href="apiInfo">API information</a>
-            </li>          
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+    <!-- <a class="navbar-brand" href="/">Home</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <div class="d-flex justify-content-start align-items-center">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link " href="/">Home<!-- <span class="sr-only">(current)</span> --></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled active" href="/survey">Take A Survey</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quiz">Take A Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/apiInfo">API Information</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropdown
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->       
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+        </ul>
+        <div class="ml-auto">
+          <form class="form-inline my-2 my-lg-0" id="takeSurvey" action="/survey" method="POST">
+              {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
+              {{/if}}                
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">ID</span>
+                <input type="text" class="form-control" placeholder="survey id" aria-describedby="basic-addon1" id="surveyId" name="surveyId">
+                <input type="hidden" name="pageName" value="survey">
+              </div>    
+              <button type="submit" class="btn btn-outline-primary">Enter</button>   
           </form>
-        </div>      
+        </div>
+      </div>
+      
+    </div>
+  </nav>    
 </div>
 
 <div class="container">
     <h1 class="text-center"></h1>
-    <div class="row">
-     Survey page. 
-    </div>
-</div> <!-- container -->
+    {{#if survey_name}}
+      <div class="d-flex justify-content-start"> 
+        <h1>{{survey_name}}</h1>
+        <h2 class="ml-auto">{{id}}</h2>
+      </div>
+    {{else}}
+        <h2> Enter survey id given by your administrator </h2>
+    {{/if}}
+    
+    {{#if dbQuestion}}
+        <div class="row">
+         <ol>
+            {{#each dbQuestion}}
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <li><h3 class="panel-title">{{this.dataValues.Question}}</h3>
+                </div>
+                <div class="panel-body">
+                    <label class="radio-inline"
+                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">>unlikely 
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">no opinion
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="optradio" value="{{this.dataValues.id}}">likely
+                    </label>
+                </div>
+                <div class="panel-footer" style="display: none" id="answer-{{id}}"><i>{{this.dataValues.Answer}}</i></div>
+              </div>            
+            {{/each }}
+        </ol>
+        </div>
+    {{/if}}
 
+</div> <!-- container -->
