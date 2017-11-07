@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-center align-items-center">
     <img class="logo" src = "/assets/img/quatro_logo.png">
   </div>
-  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
+  <p class="lead text-center">You've got questions, you've got answers</p>
   <hr class="my-4">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <!-- <a class="navbar-brand" href="/">Home</a> -->
@@ -12,13 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link active disabled" href="#">Home<!-- <span class="sr-only">(current)</span> --></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/test">Take A Test</a>
+          <a class="nav-link" href="/survey">Take A Survey</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/quiz">Take A Quiz</a>
+          <a class="nav-link disabled" href="#">Take A Quiz</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/apiInfo">API Information</a>
@@ -41,36 +41,39 @@
           <a class="nav-link disabled" href="#">Disabled</a>
         </li> -->
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
-  <div class="container">
-      <h1 class="text-center"></h1>
-      <div class="row">
-        <div class="col-md-6 col-lg-6" style="border-right: solid;" >
-          <div class="d-flex justify-content-center"><h5>Login<h5></div>
-            <!-- <nav class="navbar navbar-light bg-faded"> -->
-            {{#if loginError}}<div class="bg-danger p-2 d-flex justify-content-center">{{loginError}}</div>
-                  {{/if}}
-              <form class="d-flex justify-content-center" id="login" action="/authenticate" method="POST">
+</div>
+
+<div class="container">
+    <h1 class="text-center"></h1>
+    <div class="row">
+      <div class="col-md-6 col-lg-6" style="border-right: solid;" >
+          <div class="card p-3 mb-3">        
+            <div class="card-title"><h5>Login</h5></div>
+            <div class="card-block">
+              {{#if loginError}}<div class="bg-danger p-2 center-block">{{loginError}}</div>{{/if}}
+              <form id="login" action="/authenticate" method="POST">
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">@</span>
                     <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="userName" id="userName">
                   </div>
+
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">P</span>
                     <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1" name="password" id="password">
                   </div>  
-                  <button type="submit" class="btn btn-primary">Login</button>
+                  <div class="d-flex justify-content-center mt-4">     
+                    <button type="submit" class="btn btn-primary">login</button>   
+                  </div> 
               </form>
-            <!-- </nav>  -->           
-        </div>
-        <div class="col-md-6 col-lg-6">
-            <div class="text-center"><h5>Take Quiz<h5></div>
-            <div class="well">
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6 col-lg-6">        
+          <div class="card bg-faded p-3 card-inverse">
+            <div class="card-title"><h5>Take Quiz<h5></div>
+            <div class="card-block">
               <form id="takeQuiz" action="/quiz" method="POST">
                   {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
                   {{/if}}                
@@ -83,8 +86,8 @@
                     <button type="submit" class="btn btn-primary ">Enter</button> 
                   </div>   
               </form>
-            </div>  
-                     
-        </div>
-
-  </div> <!-- container -->
+            </div>
+          </div>              
+      </div>
+    </div>
+</div> <!-- container -->

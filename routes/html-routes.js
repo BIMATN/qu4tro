@@ -15,6 +15,7 @@ module.exports = function(app) {
   app.get("/viewQuizzes", function(req,res){
     res.render("viewQuizzes");
   });
+
   // route loads quiz.handlebars when accessed through menu system
   app.get("/quiz", function(req, res) {
     res.render("quiz");
@@ -23,6 +24,7 @@ module.exports = function(app) {
   // route loads quiz.handlebars when accessed through menu system
   app.get("/survey", function(req, res) {
     res.render("survey");
+  }); 
   app.get("/createQuizzes", function(req,res){
     res.render("createQuizzes");
   });
@@ -36,14 +38,12 @@ module.exports = function(app) {
   });
 
   // route loads quiz-b.handlebars survey page
-  app.get("/survey/:id?", function(req, res) {
-    // res.sendFile(path.join(__dirname, "../public/survey.html"));
-    res.render("quiz-b");
+  app.get("/survey", function(req, res) {
+    res.render("survey");
   });
 
     // route loads quiz-b.handlebars quiz page
-  app.get("/quiz/:id?", function(req, res) {
-    // res.sendFile(path.join(__dirname, "../public/survey.html"));
+  app.get("/quiz", function(req, res) {
     res.render("quiz-b");
   });  
 
