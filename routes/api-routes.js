@@ -92,32 +92,7 @@ module.exports = function(app) {
       });
   });
 
-  // when authenticating userName and password passed, if successful, route to home page else error
-  // use post here to "hide" values passed back to route.
-  app.post("/authenticate", function(req, res) {
-    var query = {};
-    if (req.body.userName && req.body.password) {
-      query = { user_name : req.body.userName,
-                password : req.body.password };
-    }
-
-    db.User.findAll({
-      where:query
-    }).then(function(data) {
-      console.log("data : " + JSON.stringify(data));
-      //console.log("user_name : " + data[0].user_name);      
-      if (!data || !data.length){
-        throw new Error("invalid login");
-      } else{
-       /* var filePath = path.join(__dirname,"../public/cms.html");
-        res.sendFile(filePath);*/
-        res.render("cms",{user_name: data[0].user_name});
-      }
-    });
-  });
-
-
-  // route loads quiz.handlebars
+ // route loads quiz.handlebars
   app.post("/quiz", function(req, res) {
     var query = {};
 
