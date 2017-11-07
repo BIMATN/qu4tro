@@ -12,7 +12,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-<<<<<<< Updated upstream:views/questionMaker.handlebars
           <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
@@ -20,15 +19,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/survey">Take A Survey</a>
-=======
-          <a class="nav-link active disabled" href="#">Home<!-- <span class="sr-only">(current)</span> --></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/survey">Take A Survey</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Take A Quiz</a>
->>>>>>> Stashed changes:views/index-b.handlebars
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/apiInfo">API Information</a>
@@ -54,7 +44,6 @@
     </div>
   </nav>
 </div>
-<<<<<<< Updated upstream:views/questionMaker.handlebars
 <div class="container">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
@@ -78,52 +67,3 @@
 <script>
 
 </script>
-=======
-
-<div class="container">
-    <h1 class="text-center"></h1>
-    <div class="row">
-      <div class="col-md-6 col-lg-6" style="border-right: solid;" >
-          <div class="card p-3 mb-3">        
-            <div class="card-title"><h5>Login</h5></div>
-            <div class="card-block">
-              {{#if loginError}}<div class="bg-danger p-2 center-block">{{loginError}}</div>{{/if}}
-              <form id="login" action="/authenticate" method="POST">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">@</span>
-                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1" name="userName" id="userName">
-                  </div>
-
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">P</span>
-                    <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1" name="password" id="password">
-                  </div>  
-                  <div class="d-flex justify-content-center mt-4">     
-                    <button type="submit" class="btn btn-primary">login</button>   
-                  </div> 
-              </form>
-            </div>
-          </div>
-      </div>
-      <div class="col-md-6 col-lg-6">        
-          <div class="card bg-faded p-3 card-inverse">
-            <div class="card-title"><h5>Take Quiz<h5></div>
-            <div class="card-block">
-              <form id="takeQuiz" action="/quiz" method="POST">
-                  {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
-                  {{/if}}                
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">ID</span>
-                    <input type="text" class="form-control" placeholder="quiz id" aria-describedby="basic-addon1" id="quizId" name="quizId">
-                    <input type="hidden" name="pageName" value="index-b">
-                  </div>
-                  <div class="d-flex justify-content-center mt-4">     
-                    <button type="submit" class="btn btn-primary ">Enter</button> 
-                  </div>   
-              </form>
-            </div>
-          </div>              
-      </div>
-    </div>
-</div> <!-- container -->
->>>>>>> Stashed changes:views/index-b.handlebars
