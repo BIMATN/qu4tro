@@ -44,7 +44,7 @@ module.exports = function(app) {
 
     // route loads quiz-b.handlebars quiz page
   app.get("/quiz", function(req, res) {
-    res.render("quiz-b");
+    res.render("quiz");
   });  
 
   // route loads apiInfo.handlebars informational page on how to use our API
@@ -64,21 +64,25 @@ module.exports = function(app) {
     if (req.body.userName && req.body.password) {
       query = { user_name : req.body.userName,
                 password : req.body.password };
+
+      db.User.findAll({
+        where:query
+      }).then(function(data) {
+        console.log("data : " + JSON.stringify(data));
+        //console.log("user_name : " + data[0].user_name);      
+        if (!data || !data.length){
+          res.render("index",{loginError: "incorrect Username and/or password"});
+          // throw new Error("invalid login");
+        } else{
+         /* var filePath = path.join(__dirname,"../public/cms.html");
+          res.sendFile(filePath);*/
+          res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name});
+          response.json(data);
+        }
+      });
+    } else {
+      res.render("index",{loginError: "incorrect Username and/or password"});
     }
-    db.User.findAll({
-      where:query
-    }).then(function(data) {
-      console.log("data : " + JSON.stringify(data));
-      //console.log("user_name : " + data[0].user_name);      
-      if (!data || !data.length){
-        throw new Error("invalid login");
-      } else{
-       /* var filePath = path.join(__dirname,"../public/cms.html");
-        res.sendFile(filePath);*/
-        res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name});
-        response.json(data);
-      }
-    });
   });
 
   // route loads quiz.handlebars
