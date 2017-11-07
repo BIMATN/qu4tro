@@ -51,10 +51,10 @@
         <div class="card-header text-center">Every quiz needs a name, start yours by choosing one!</div>
         <div class="card-body text-center">
           <h4 class="card-title">Quiz Creator</h4>
-          <form id="form" method="post" action="/api/">
+          <form id="form" method="post" action="/newQuiz">
             <div class="form-group col-12 mx-auto">
                <label for="quizName">Please Enter a Quiz Name</label>
-               <textarea class="form-control" id="quizName" rows="1" type="text" placeholder="e.g. A Tale of Two Cities"></textarea>
+               <textarea class="form-control" id="quizName" rows="1" type="text" name="quizName" placeholder="e.g. A Tale of Two Cities"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
           </form>

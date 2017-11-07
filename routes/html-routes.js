@@ -46,6 +46,7 @@ module.exports = function(app) {
     // res.sendFile(path.join(__dirname, "../public/apiInfo.html"));
     res.render("apiInfo");
   });
+
   // when authenticating userName and password passed, if successful, route to cms page else error
   // use post here to "hide" values passed back to route.
   app.post("/authenticate", function(req, res) {
@@ -70,6 +71,7 @@ module.exports = function(app) {
       }
     });
   });
+
   // route loads quiz.handlebars
   app.post("/quiz", function(req, res) {
     var query = {};
@@ -85,5 +87,20 @@ module.exports = function(app) {
     } else{
       res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again"});
     }
-  });  
+  });
+
+  // route for making a new quiz, works with user id and quiz name
+  app.post("/newQuiz", function(req, res) {
+    if (req.body.userId && req.body.quizName) {
+      db.Quiz.create({
+      userId = req.body.userId;
+      quiz_name = req.body.quizName;
+      }).then(function(quizCreated) {
+        // console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
+        res.render("questionMaker", {userId: quizCreated[0].userId, quiz_name:quizCreated[0].quiz_name});
+      });
+    } else{
+      res.render("createQuizzes", {quizIdError: "Please try again. A quiz name is required"});
+    }
+  });
 };
