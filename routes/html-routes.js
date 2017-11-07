@@ -75,7 +75,7 @@ module.exports = function(app) {
       } else{
        /* var filePath = path.join(__dirname,"../public/cms.html");
         res.sendFile(filePath);*/
-        res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name, user_id: data[0].UserId});
+        res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name, userId: data[0].UserId});
         //Need to save username or user id to session storage so we can keep them logged in while the tab is open
       }
     });
