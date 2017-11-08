@@ -52,13 +52,11 @@
         <div class="card-body text-center">
           <h4 class="card-title">Your question will go here</h4>
           <div id="questions"></div>
-          <form id="form" method="post" action="/api/">
+          <form id="answers" method="PUT" action="/">
             <div class="form-group col-12 mx-auto">
-               <label for="answers">Enter Possible Answers Here:</label>
-               <textarea class="form-control" id="a" rows="1" type="text" placeholder="Choice A"></textarea>
-               <textarea class="form-control" id="b" rows="1" type="text" placeholder="Choice B"></textarea>
-               <textarea class="form-control" id="c" rows="1" type="text" placeholder="Choice C"></textarea>
-               <textarea class="form-control" id="d" rows="1" type="text" placeholder="Choice D"></textarea>
+               <label for="answers">{{question}}</label>
+               <textarea class="form-control" id="answer" rows="1" type="text" name="answer" placeholder="e.g. There is No Spoon"></textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="questionId">{{questionId}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Answers</button>
           </form>

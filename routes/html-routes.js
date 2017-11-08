@@ -73,7 +73,7 @@ module.exports = function(app) {
   app.get("/about", function(req, res) {
     res.render("about");
   });
-     
+
   // when authenticating userName and password passed, if successful, route to cms page else error
   // use post here to "hide" values passed back to route.
   app.post("/authenticate", function(req, res) {
@@ -126,11 +126,43 @@ module.exports = function(app) {
       UserId: parseInt(req.body.userId),
       quiz_name: req.body.quizName
       }).then(function(quizCreated) {
-        res.render("questionMaker", {quizName:quizCreated.dataValues.quiz_name});
+        res.render("questionMaker", {quizName:quizCreated.dataValues.quiz_name, quizId: quizCreated.dataValues.id});
       });
     } else{
       console.log(req.body);
       res.render("createQuizzes", {quizNameError: "Please try again. A quiz name is required."});
+    }
+  });
+
+  // route for making a new quiz, works with user id and quiz name
+  app.post("/questionMaker", function(req, res) {
+    if (req.body.quizId && req.body.question) {
+      console.log(req.body);
+      db.Question.create({
+      Question: req.body.question,
+      QuizId: req.body.quizId
+      }).then(function(questionCreated) {
+        res.render("answers", {question:questionCreated.dataValues.Question, questionId: questionCreated.dataValues.id});
+      });
+    } else{
+      console.log(req.body);
+      res.render("questionMaker", {questionError: "Please try again. A question is required."});
+    }
+  });
+
+  // route for making a new quiz, works with user id and quiz name
+  app.put("/answers", function(req, res) {
+    if (req.body.questionId && req.body.answer) {
+      console.log(req.body);
+      db.Question.update({
+      Answer: req.body.answer,
+      id: req.body.questionId
+      }).then(function(questionCreated) {
+        // res.render("answers", {question:questionCreated.dataValues.Question, questionId: questionCreated.dataValues.id});
+      });
+    } else{
+      console.log(req.body);
+      res.render("answers", {answerError: "Please try again. An answer is required."});
     }
   });
 };

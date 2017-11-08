@@ -52,11 +52,11 @@
         <div class="card-body text-center">
           <h4 class="card-title">{{quizName}}</h4>
           <div id="questions"></div>
-          <form id="form" method="post" action="/questionMaker">
+          <form id="questioner" action="/questionMaker" method="POST">
             <div class="form-group col-12 mx-auto">
-               <label for="quizName">Please Enter Your First Question</label>
-               <textarea class="form-control" id="name" rows="1" type="text" placeholder="e.g. A Tale of Two Cities"></textarea>
-               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="userId"></textarea>
+               <label for="question">Please Enter Your First Question</label>
+               <textarea class="form-control" id="question" rows="1" type="text" name="question" placeholder="e.g. How do you get to Carnegie Hall?"></textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{quizId}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Question</button>
           </form>
