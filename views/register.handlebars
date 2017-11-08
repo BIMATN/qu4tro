@@ -29,7 +29,30 @@
     </div>
   </nav>
 </div>
-
 <div class="container">
-    
-</div> <!-- container -->
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="card text-white bg-info mb-3 w-50 mx-auto">
+        <div class="card-header text-center">Register to Build Your Own Quizzes!</div>
+        <div class="card-body text-center">
+          <h4 id="nameTarget" class="card-title">{{quizName}}</h4>
+          <div id="questions"></div>
+          <form id="register" action="/register" method="POST">
+            <div class="form-group col-12 mx-auto">
+              <label for="question"><h2>QU4TRO Time!</h2></label>
+              <div class = "col-12">
+                <h3>User Name</h6>
+                <textarea class="form-control" id="userName" type="text" rows="1" name="userName" placeholder="e.g. nobleLion@blah.com"></textarea>
+              </div>
+              <div class = "col-12">
+                <h3>Password</h6>
+                <textarea class="form-control" id="password" type="text" rows="1" name="password" placeholder="e.g. 789563H!2"></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- Container -->
