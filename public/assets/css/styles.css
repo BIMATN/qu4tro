@@ -45,14 +45,18 @@ a.disabled {
    cursor:not-allowed;
    color: gray;
  }   
-.profilepic{
-  height: auto;
-  width: 200px;
-  border-radius: 50%;
-}
 
 #slidecontainer {
     width: 100%;
+}
+
+a.btn{
+  opacity: .7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;  
+}
+a.btn:hover {
+  opacity: 1;
 }
 
 .slider {
