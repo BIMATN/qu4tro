@@ -228,7 +228,7 @@ module.exports = function(app) {
       });
     }
     else {
-      res.render("register",{registerError: "Please try Again"});
+      res.render("register",{registerError: "Please try Again"});//need to add handlebars into page
     };
   });
 
