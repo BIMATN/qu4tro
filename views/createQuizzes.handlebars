@@ -33,7 +33,7 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, User</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" id="logOut" href="/">Log Out</a>
             <div class="dropdown-divider"></div>
@@ -51,10 +51,13 @@
         <div class="card-header text-center">Every quiz needs a name, start yours by choosing one!</div>
         <div class="card-body text-center">
           <h4 class="card-title">Quiz Creator</h4>
-          <form id="form" method="post" action="/newQuiz">
+          <form  id="quizNamer" action="/newQuiz" method="POST">
             <div class="form-group col-12 mx-auto">
                <label for="quizName">Please Enter a Quiz Name</label>
+               {{#if quizNameError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{quizNameError}}</b></p></div>
+                  {{/if}}
                <textarea class="form-control" id="quizName" rows="1" type="text" name="quizName" placeholder="e.g. A Tale of Two Cities"></textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="userId"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
           </form>
@@ -63,6 +66,4 @@
     </div>
   </div>
 </div> <!-- container -->
-<script>
-
-</script>
+<script src="assets/js/createQuizzes.js"></script>

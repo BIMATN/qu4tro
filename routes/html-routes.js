@@ -72,7 +72,8 @@ module.exports = function(app) {
   // route loads about.handlebars informational page on the contributing team
   app.get("/about", function(req, res) {
     res.render("about");
-  });   
+  });
+     
   // when authenticating userName and password passed, if successful, route to cms page else error
   // use post here to "hide" values passed back to route.
   app.post("/authenticate", function(req, res) {
@@ -88,7 +89,7 @@ module.exports = function(app) {
         console.log("data : " + JSON.stringify(data));
         //console.log("user_name : " + data[0].user_name);      
         if (!data || !data.length){
-          res.render("index",{loginError: "incorrect Username and/or password"});
+          res.render("index",{loginError: "Incorrect Username and/or password."});
         } else{
          /* var filePath = path.join(__dirname,"../public/cms.html");
           res.sendFile(filePath);*/
@@ -96,7 +97,7 @@ module.exports = function(app) {
         }
       });
     } else {
-      res.render("index",{loginError: "incorrect Username and/or password"});
+      res.render("index",{loginError: "Incorrect Username and/or password."});
     }
   });
 
@@ -113,22 +114,23 @@ module.exports = function(app) {
         res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name});
       });
     } else{
-      res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again"});
+      res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again."});
     }
   });
 
   // route for making a new quiz, works with user id and quiz name
   app.post("/newQuiz", function(req, res) {
     if (req.body.userId && req.body.quizName) {
+      console.log(req.body);
       db.Quiz.create({
-      userId: req.body.userId,
+      UserId: parseInt(req.body.userId),
       quiz_name: req.body.quizName
       }).then(function(quizCreated) {
-        // console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
-        res.render("questionMaker", {userId: quizCreated[0].userId, quiz_name:quizCreated[0].quiz_name});
+        res.render("questionMaker", {quizName:quizCreated.dataValues.quiz_name});
       });
     } else{
-      res.render("createQuizzes", {quizIdError: "Please try again. A quiz name is required"});
+      console.log(req.body);
+      res.render("createQuizzes", {quizNameError: "Please try again. A quiz name is required."});
     }
   });
 };
