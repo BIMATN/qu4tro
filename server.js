@@ -29,6 +29,12 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+var Handlebars = require('handlebars');
+var H = require('just-handlebars-helpers');
+ 
+// Register helpers for Handlebars 
+H.registerHelpers(Handlebars);
+
 // allow CORS access for calls outside of domain
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
