@@ -5,21 +5,19 @@
   <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
   <hr class="my-4">
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
-    <!-- <a class="navbar-brand" href="/">Home</a> -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <div class="d-flex justify-content-start align-items-center  w-100">
-        <ul class="navbar-nav">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link " href="/">Home<!-- <span class="sr-only">(current)</span> --></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled active">Take A Survey</a>
+            <a class="nav-link" href="/cms">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/quiz">Take A Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/survey">Take A Survey</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/apiInfo">API Information</a>
@@ -27,37 +25,29 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li> -->       
-          <!-- <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li> -->
         </ul>
-        <div class="ml-auto mx-4">
-          <form class="form-inline my-2 my-lg-0" id="takeSurvey" action="/survey" method="POST">
-              {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
-              {{/if}}                
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">ID</span>
-                <input type="text" class="form-control" placeholder="survey id" aria-describedby="basic-addon1" id="surveyId" name="surveyId">
-                <input type="hidden" name="pageName" value="survey">
-              </div>    
-              <button type="submit" class="btn btn-outline-primary">Enter</button>   
-          </form>
-        </div>
+        <form class="form-inline my-2 my-lg-0" id="takeSurvey" action="/survey" method="POST">
+            {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
+            {{/if}}                
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">ID</span>
+              <input type="text" class="form-control" placeholder="survey id" aria-describedby="basic-addon1" id="surveyId" name="surveyId">
+              <input type="hidden" name="pageName" value="survey">
+            </div>    
+            <button type="submit" class="btn btn-outline-primary">Enter</button>   
+        </form>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" id="logOut" href="/">Log Out</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/cantDoThatHaHa">Un-Register</a>
+            </div>
+          </li>
+        </ul>
       </div>
-      
-    </div>
-  </nav>    
+    </nav>    
 </div>
 
 <div class="container">
