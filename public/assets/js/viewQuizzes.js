@@ -1,6 +1,6 @@
 $(function(){
 	$("#navbarDropdown").text("Welcome, "+sessionStorage.userName);
-	$("#logOut").on("click", function(){
+	$("#item1").on("click", function(){
 		sessionStorage.clear();
 	});
 	$(".btn-danger").on("click", function(){

@@ -1,7 +1,7 @@
 $(function(){
 	if(sessionStorage.userName){
 		$("#navbarDropdown").text("Welcome, "+sessionStorage.userName);
-		$("#logOut").on("click", function(){
+		$("#item1").on("click", function(){
 			sessionStorage.clear();
 		});
 	}

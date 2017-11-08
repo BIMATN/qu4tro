@@ -8,7 +8,7 @@ $(function(){
 		sessionStorage.setItem("currentQuizId", $("#idTarget").val().trim());
 		sessionStorage.setItem("currentQuizName", $("#nameTarget").text());
 	}
-	$("#logOut").on("click", function(){
+	$("#item1").on("click", function(){
 		sessionStorage.clear();
 	})
 	$("#completeQuiz").on("click", function(){

@@ -10,7 +10,7 @@ $(function(){
 		$("#navbarDropdown").text("Welcome, "+sessionStorage.userName);
 		$("#view").attr("href", "/viewQuizzes/"+sessionStorage.userId);
 	};
-	$("#logOut").on("click", function(){
+	$("#item1").on("click", function(){
 		sessionStorage.clear();
 	});
 })
