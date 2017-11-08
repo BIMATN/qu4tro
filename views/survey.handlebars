@@ -75,26 +75,17 @@
         <div class="row">
          <ol>
             {{#each dbQuestion}}
-              <div class="panel panel-info">
+              <div class="panel panel-info p-2">
                 <div class="panel-heading">
-                  <li><h3 class="panel-title">{{this.dataValues.Question}}</h3>
+                  <h3 class="panel-title">{{this.dataValues.Question}}</h3>
                 </div>
-                    <div class="panel-body">                
-                        {{#if this.dataValues.Category == "scale"}}
-                          <div class="card">
-                            <label class="radio-inline"
-                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">unlikely 
-                            </label>
-                            <label class="radio-inline">
-                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">no opinion
-                            </label>
-                            <label class="radio-inline">
-                              <input type="radio" name="optradio" value="{{this.dataValues.id}}">likely
-                            </label>
+                    <div class="panel-body">
+                          <div class="card p-2 d-inline-flex justify-content-start">
+                              <div id="slidecontainer"> 
+                                <input type="range" min="1" max="100" value="5" class="slider" id="myRange">
+                              </div>
                           </div>
-                        {{/if}}
                     </div>
-                <div class="panel-footer" style="display: none" id="answer-{{id}}"><i>{{this.dataValues.Answer}}</i></div>
               </div>            
             {{/each }}
         </ol>

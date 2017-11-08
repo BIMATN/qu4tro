@@ -16,13 +16,15 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
 
-// Set Handlebars.
-var exphbs = require("express-handlebars");// allow CORS
+// allow CORS
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+// Set Handlebars.
+var exphbs = require("express-handlebars");
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");

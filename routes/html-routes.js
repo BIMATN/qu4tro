@@ -91,9 +91,8 @@ module.exports = function(app) {
         if (!data || !data.length){
           res.render("index",{loginError: "Incorrect Username and/or password."});
         } else{
-         /* var filePath = path.join(__dirname,"../public/cms.html");
-          res.sendFile(filePath);*/
-          res.render("cms",{userName: data[0].user_name, userId: data[0].id});
+          res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name});
+          response.json(data);
         }
       });
     } else {
