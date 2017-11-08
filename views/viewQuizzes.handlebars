@@ -45,7 +45,7 @@
     {{#each quizzes}}
         <div class = "d-flex justify-content-center">
           <li>
-             {{this.dataValues.quiz_name}} <button type="button" class="btn btn-info btn-sm" data-quizId = {{this.dataValues.id}}>Edit Test</button>
+             {{this.dataValues.quiz_name}} <button type="button" class="btn btn-info btn-sm" data-quizId = {{this.dataValues.id}}>Edit Test</button> <button type="button" class="btn btn-danger btn-sm" data-quizId = {{this.dataValues.id}}>Delete Quiz</button>
           </li>
         </div>
     {{/each}}

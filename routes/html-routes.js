@@ -93,7 +93,6 @@ module.exports = function(app) {
     if (req.body.userName && req.body.password) {
       query = { user_name : req.body.userName,
                 password : req.body.password };
-
       db.User.findAll({
         where:query
       }).then(function(data) {
@@ -103,7 +102,6 @@ module.exports = function(app) {
           res.render("index",{loginError: "Incorrect Username and/or password."});
         } else{
           res.render("cms",{user_welcome: "Welcome, "+ data[0].user_name});
-          response.json(data);
         }
       });
     } else {
@@ -171,7 +169,8 @@ module.exports = function(app) {
         id: req.body.questionId
       }
       }).then(function(answerAdded) {
-        res.render("questionMaker", {quizId: answerAdded[0].dataValues.QuizId, nextQuestion: true});
+        console.log(answerAdded[0].dataValues);
+        //res.render("questionMaker", {QuizId: answerAdded[0].dataValues.QuizId, nextQuestion: true});
       });
     } else{
       console.log(req.body);

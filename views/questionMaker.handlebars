@@ -54,7 +54,7 @@
                {{#if questionError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{questionError}}</b></p></div>
                   {{/if}}
                <textarea class="form-control" id="question" rows="1" type="text" name="question" placeholder="e.g. How do you get to Carnegie Hall?"></textarea>
-               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{quizId}}</textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{#if nextQuestion}}{{QuizId}}{{else}}{{quizId}}{{/if}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Question</button>
           </form>
