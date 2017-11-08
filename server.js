@@ -29,6 +29,7 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// setup just-handlebars-helpers for more handlebar functionality 
 var Handlebars = require('handlebars');
 var H = require('just-handlebars-helpers');
  

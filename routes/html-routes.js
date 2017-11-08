@@ -1,6 +1,12 @@
 var path = require('path');
 var db = require("../models");
 
+// setup cryptr for external use of quiz, survey and user IDs 
+var Cryptr = require('cryptr'),
+  survey_cryptr = new Cryptr('qu4tro');
+  quiz_cryptr = new Cryptr('qu4troIsBoss');
+
+
 module.exports = function(app) {
   // goes to home page when accessing home page of site
   app.get("/", function(req, res) {
@@ -51,23 +57,33 @@ module.exports = function(app) {
   // route loads quiz-b.handlebars survey page
   app.post("/survey", function(req, res) {
     var query = {};
-    if (req.body.surveyId) {
-      query = { SurveyId : req.body.surveyId};
-      db.SurveyQuestion.findAll({
-        where:query,
-        include: [db.Survey]
-      }).then(function(data) {
-        console.log("data : " + JSON.stringify(data));
-        //console.log("user_name : " + data[0].user_name);      
-        if (!data || !data.length){
-          res.render("survey",{loginError: "Incorrect survey id"});
-        } else{
-          res.render("survey",{dbQuestion: data, survey_name:data[0].Survey.survey_name});
+    if (req.body.surveyId) { // if no survey ID entered, route back to sender
+        var decryptedString = req.body.surveyId;
+        try {
+            decryptedString = survey_cryptr.decrypt(req.body.surveyId);
+
+            query = { SurveyId : decryptedString};
+            console.log("******* decryptedString =" + decryptedString);
+            db.SurveyQuestion.findAll({
+              where:query,
+              include: [db.Survey]
+            }).then(function(data) {
+              console.log("data : " + JSON.stringify(data));
+              //console.log("user_name : " + data[0].user_name);      
+              if (!data || !data.length){
+                res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});
+              } else{   
+                res.render("survey",{dbQuestion: data, survey_name:data[0].Survey.survey_name, survey_id:req.body.surveyId});
+              }
+            });
         }
-      });
-    } else {
-      res.render("survey",{loginError: "Incorrect survey id"});
-    }    
+        catch(err) {
+            decryptedString = 0;
+              res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});            
+        }           
+      } else {
+        res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."}); 
+      }           
   });
 
     // route loads quiz-b.handlebars quiz page
