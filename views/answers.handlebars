@@ -26,14 +26,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>
-        <form class="form-inline my-2 my-lg-0 mr-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, User</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" id="logOut" href="/">Log Out</a>
             <div class="dropdown-divider"></div>
@@ -50,11 +46,13 @@
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
         <div class="card-header text-center">You are good at this! Now lets make some answers...</div>
         <div class="card-body text-center">
-          <h4 class="card-title">Your question will go here</h4>
+          <h4 class="card-title">{{question}}</h4>
           <div id="questions"></div>
-          <form id="answers" method="PUT" action="/">
+          <form id="answers" method="POST" action="/answers">
             <div class="form-group col-12 mx-auto">
-               <label for="answers">{{question}}</label>
+               <label for="answers">Please Enter an Answer</label>
+               {{#if answerError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{answerError}}</b></p></div>
+                  {{/if}}
                <textarea class="form-control" id="answer" rows="1" type="text" name="answer" placeholder="e.g. There is No Spoon"></textarea>
                <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="questionId">{{questionId}}</textarea>
             </div>

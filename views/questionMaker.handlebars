@@ -26,14 +26,10 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About</a>
         </li>
-        <form class="form-inline my-2 my-lg-0 mr-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-        </form>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, User</a>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" id="logOut" href="/">Log Out</a>
             <div class="dropdown-divider"></div>
@@ -47,6 +43,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
+      {{#if nextQuestion}}<a href="/cms"><button class="btn btn-warning">Complete Test</button></a>
+            {{/if}}
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
         <div class="card-header text-center">Great Job! Now for the questions!</div>
         <div class="card-body text-center">
@@ -54,7 +52,9 @@
           <div id="questions"></div>
           <form id="questioner" action="/questionMaker" method="POST">
             <div class="form-group col-12 mx-auto">
-               <label for="question">Please Enter Your First Question</label>
+               <label for="question">Please Enter A Question</label>
+               {{#if questionError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{questionError}}</b></p></div>
+                  {{/if}}
                <textarea class="form-control" id="question" rows="1" type="text" name="question" placeholder="e.g. How do you get to Carnegie Hall?"></textarea>
                <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{quizId}}</textarea>
             </div>

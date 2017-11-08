@@ -151,14 +151,17 @@ module.exports = function(app) {
   });
 
   // route for making a new quiz, works with user id and quiz name
-  app.put("/answers", function(req, res) {
+  app.post("/answers", function(req, res) {
     if (req.body.questionId && req.body.answer) {
       console.log(req.body);
       db.Question.update({
-      Answer: req.body.answer,
-      id: req.body.questionId
-      }).then(function(questionCreated) {
-        // res.render("answers", {question:questionCreated.dataValues.Question, questionId: questionCreated.dataValues.id});
+        Answer: req.body.answer
+      }, {
+      where: {
+        id: req.body.questionId
+      }
+      }).then(function(answerAdded) {
+        res.render("questionMaker", {nextQuestion: true});
       });
     } else{
       console.log(req.body);
