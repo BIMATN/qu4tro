@@ -11,4 +11,8 @@ $(function(){
 	$("#logOut").on("click", function(){
 		sessionStorage.clear();
 	})
+	$("#completeQuiz").on("click", function(){
+		sessionStorage.removeItem("currentQuizName");
+		sessionStorage.removeItem("currentQuizId");
+	})
 })
