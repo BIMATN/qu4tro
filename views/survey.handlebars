@@ -62,29 +62,35 @@
 
 <div class="container">
         <div class="row">
-              <div class="card p-2 my-2 w-100">
+            {{#if loginError}}
+              <h5 class="text-danger"> {{loginError}} </h5>
+            {{else}}
+              <h5> Enter survey id given by your administrator </h5>
+            {{/if}}          
+              <div class="card p-4 mb-4 w-100">
                   <div class="card-block">
-                    <div class="card-title w-100">
+                    <div class="card-title w-100 text-white p-2 bg-info">
                         {{#if survey_name}}
                           <div class="d-flex justify-content-start w-100"> 
                             <h1>{{survey_name}}</h1>
                             <h2 class="ml-auto">Survey: {{survey_id}}</h2>
-                          </div>
-                        {{else}}
-                          {{#if loginError}}
-                            <h2> {{loginError}} </h2>
-                          {{else}}
-                            <h2> Enter survey id given by your administrator </h2>
-                          {{/if}}
+                          </div>                 
                         {{/if}}                
                     </div>      
                   {{#if dbQuestion}}                                 
                     {{#each dbQuestion}}      
-                    <div class="card-text d-flex w-100 align-items-center">                                     
-                        <h4 class="card-title">{{this.dataValues.Question}}</h4>                        
+                    <div class="card-text d-flex w-75 align-items-center">                                     
+                        <h5 class="card-title">{{this.dataValues.Question}}</h5>                        
                         {{#if (eq this.dataValues.Category "scale")}}
                               <div id="slidecontainer"> 
-                                <input type="range" min="1" max="100" value="5" class="slider" id="Q"+{{id}} name="Q"+{{id}}>
+                                <input type="range" min="0" max="4" class="slider" id="Q"+{{id}} name="Q"+{{id}}>
+                                  <span class="d-inline-flex align-items-start justify-content-between w-100">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>5</span>
+                                  </span>                                
                               </div>
                         {{/if}}
                         {{#if (eq this.dataValues.Category "yes-no")}}
