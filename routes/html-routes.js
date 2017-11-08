@@ -54,37 +54,6 @@ module.exports = function(app) {
     res.render("answers");
   });
 
-  // route loads quiz-b.handlebars survey page
-  app.post("/survey", function(req, res) {
-    var query = {};
-    if (req.body.surveyId) { // if no survey ID entered, route back to sender
-        var decryptedString = req.body.surveyId;
-        try {
-            decryptedString = survey_cryptr.decrypt(req.body.surveyId);
-
-            query = { SurveyId : decryptedString};
-            console.log("******* decryptedString =" + decryptedString);
-            db.SurveyQuestion.findAll({
-              where:query,
-              include: [db.Survey]
-            }).then(function(data) {
-              console.log("data : " + JSON.stringify(data));
-              //console.log("user_name : " + data[0].user_name);      
-              if (!data || !data.length){
-                res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});
-              } else{   
-                res.render("survey",{dbQuestion: data, survey_name:data[0].Survey.survey_name, survey_id:req.body.surveyId});
-              }
-            });
-        }
-        catch(err) {
-            decryptedString = 0;
-              res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});            
-        }           
-      } else {
-        res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."}); 
-      }           
-  });
 
     // route loads quiz-b.handlebars quiz page
   app.get("/quiz", function(req, res) {
@@ -125,21 +94,71 @@ module.exports = function(app) {
     }
   });
 
+  // route loads quiz.handlebars survey page
+  app.post("/survey", function(req, res) {
+    var query = {};
+    if (req.body.surveyId) { // if no survey ID entered, route back to sender
+        var decryptedString = req.body.surveyId;
+        try {
+            decryptedString = survey_cryptr.decrypt(req.body.surveyId);
+
+            query = { SurveyId : decryptedString};
+            console.log("******* decryptedString =" + decryptedString);
+            db.SurveyQuestion.findAll({
+              where:query,
+              include: [db.Survey]
+            }).then(function(data) {
+              console.log("data : " + JSON.stringify(data));
+              //console.log("user_name : " + data[0].user_name);      
+              if (!data || !data.length){
+                res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});
+              } else{   
+                res.render("survey",{dbQuestion: data, survey_name:data[0].Survey.survey_name, survey_id:req.body.surveyId});
+              }
+            });
+        }
+        catch(err) {
+            decryptedString = 0;
+              res.render("survey",{loginError: "Incorrect survey id. Ask your Administrator for a valid Survey ID."});            
+        }           
+      } else {
+        res.render("survey",{loginError: "Incorrect survey id. No Survey id entered."}); 
+      }           
+  });
+
   // route loads quiz.handlebars
   app.post("/quiz", function(req, res) {
-    var query = {};
+
     if (req.body.quizId) {
-      query.QuizId = req.body.quizId;
-      db.Question.findAll({
-        where: query,
-        include: [db.Quiz]
-      }).then(function(dbQuestion) {
-        // console.log(">>>" + dbQuestion[0].Quiz.quiz_name);
-        res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name});
-      });
+        var query = {};
+        var encryptedString = quiz_cryptr.encrypt(req.body.quizId);
+        console.log("*** encrypted quiz ID: " + encryptedString);      
+
+        try {                  
+            var decryptedString = quiz_cryptr.decrypt(encryptedString);
+
+            query = {QuizId : decryptedString};
+            console.log("******* decryptedString =" + decryptedString);      
+            query.QuizId = decryptedString;
+            db.Question.findAll({
+              where: query,
+              include: [db.Quiz]
+            }).then(function(dbQuestion) {
+              if (!dbQuestion || !dbQuestion.length){
+                res.render("quiz",{quizIdError: "Incorrect Quiz id. Ask your Administrator for a valid Quiz ID."});
+              } else{   
+                res.render("quiz", {dbQuestion: dbQuestion, quiz_name:dbQuestion[0].Quiz.quiz_name, quizId:decryptedString});
+              }
+              
+            });
+        }
+        catch(err) {
+              res.render("quiz",{quizIdError: "Incorrect quiz id. Ask your Administrator for a valid Quiz ID."});            
+        }                        
     } else{
-      res.render(req.body.pageName, {quizIdError: "Incorrect Quiz ID. Please try again."});
+      res.render("quiz", {quizIdError: "No Quiz id entered. Please try again."});
     }
+
   });
 
   // route for making a new quiz, works with user id and quiz name

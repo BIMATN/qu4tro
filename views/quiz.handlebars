@@ -19,7 +19,7 @@
             <a class="nav-link" href="/survey">Take A Survey</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled active" href="/quiz">Take A Quiz</a>
+            <a class="nav-link disabled active">Take A Quiz</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/apiInfo">API Information</a>
@@ -58,32 +58,67 @@
   </nav>    
 </div>
 
-<div class="container">
-    {{#if quiz_name}}
-      <div class="d-flex justify-content-start"> 
-        <h1>{{quiz_name}}</h1>
-        <h2 class="ml-auto">Quiz ID: {{quizId}}</h2>
-      </div>
-    {{else}}
-        {{#if quizIdError}}<h2 class="text-danger"><b>{{quizIdError}}</b></h2>{{/if}}  
-    {{/if}}
-   
-    {{#if dbQuestion}}
-        <div class="row">
-         <ol>
-            {{#each dbQuestion}}
-              <div class="d-flex panel panel-info">
-                <div class="panel-heading">
-                  <li><h3 class="panel-title">{{this.dataValues.Question}}</h3>
-                </div>
-                <div class="panel-body">
-                  <input type="text" data-answer="{{id}}">
-                </div>
-                <div class="panel-footer" style="display: none" id="answer-{{id}}"><i>{{this.dataValues.Answer}}</i></div>
-              </div>            
-            {{/each }}
-        </ol>
-        </div>
-    {{/if}}
+<!-- <div class="container"> 
+    <div class="row">
+        {{#if loginError }}
+          <h5 class="text-danger"> {{loginError}} </h5>
+        {{else unless dbQuestion}}
+          <h5> Enter Quiz id given by your administrator </h5>              
+        {{/if}}         
+      {{#if dbQuestion}}
+        {{#each dbQuestion}}
+          <div class="d-flex panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">{{this.dataValues.Question}}</h3>
+            </div>
+            <div class="panel-body">
+              <input type="text" data-answer="{{id}}">
+            </div>
+            <div class="panel-footer" style="display: none" id="answer-{{id}}"><i>{{this.dataValues.Answer}}</i></div>
+          </div>            
+        {{/each }}
+      {{/if}}
+    </div>
+    
 
+</div> container --> 
+
+<div class="container">
+        <div class="row">
+            {{#if quizIdError }}
+              <h5 class="text-danger"> {{quizIdError}} </h5>
+            {{else unless dbQuestion}}
+              <h5> Enter Quiz id given by your administrator </h5>              
+            {{/if}}          
+              <div class="card p-4 mb-4 w-100">
+                  <div class="card-block">
+                    <div class="card-title w-100 text-white p-2 bg-info">
+                        {{#if quiz_name}}
+                          <div class="d-flex justify-content-start w-100"> 
+                            <h2>{{quiz_name}}</h2>
+                            <h2 class="ml-auto">Quiz: {{quizId}}</h2>
+                          </div>                 
+                        {{/if}}                
+                    </div>      
+                  {{#if dbQuestion}}                                 
+                    {{#each dbQuestion}}
+                    <div class="row">
+                      <div class="col-6">
+                          <div class="card-text d-flex w-100 align-content-center justify-content-end">                                    
+                              <span><h5 class="align-text-middle text-right">{{this.dataValues.Question}}</h5></span>
+                          </div>
+                      </div>
+                      <div class="col-6 d-flex align-content-center">
+                          <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
+                              <span><input type="text" name="{{this.dataValues.Question.id}}"></span>
+                          </div>
+                      </div>
+                    </div>
+                    {{/each }} 
+                  {{/if}} 
+                  <div class="row d-flex justify-content-center border border-bottom-0 border-left-0 border-right-0">
+                    <button class="btn btn-outline-primary my-4">submit</button>
+                  </div>                                    
+                  </div> <!-- card-block -->
+              </div> <!-- card  -->         
 </div> <!-- container -->
