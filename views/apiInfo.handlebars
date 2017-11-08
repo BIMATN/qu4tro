@@ -22,10 +22,10 @@
             <a class="nav-link" href="/quiz">Take A Quiz</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/apiInfo">API Information</a>
+            <a class="nav-link active">API Information</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  disabled active" href="/about">About</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
           <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,46 +49,96 @@
 </div>
 
 <div class="container">
-      <div class="well">
-    <h1 class="text-center">How to use the Qu4tro API</h1>
-    <div>
-      <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">/api/quiz/:id</h3>
-          </div>
-          <div class="panel-body">
-            GET route for getting all of the questions for quiz ID passed.  Passing the quiz ID is mandatory.
-          </div>
-      </div>
 
-      <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">/api/user/:id</h3>
-            <i class="fa fa-github" aria-hidden="true">cmasters22</i>
+  <div class="card card-outline-primary text-center p-4">
+      <h3 class="card-title">How to use the Qu4tro API</h3>
+      <div class="card-block">
+        <div class="card card-outline-info mb-3 text-center">
+          
+          <h5 class="card-text">/api/quiz/&lt quiz id &gt</h5>
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>GET route for getting all of the questions for quiz ID passed.  Passing the quiz ID is mandatory.</p>
+            </blockquote>
           </div>
-          <div class="panel-body">
-            GET route for getting quiz information for all your quizzes.  Your userID is mandatory. 
-          </div>
-      </div>
-    <h1 class="text-center">Meet the contributing Members</h1>
-    <div>
-      <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">Ben Rodriguezz</h3>
-          </div>
-          <div class="panel-body">
-            Web Developer, Back End
-          </div>
-      </div>
+        </div>
 
-      <div class="panel panel-info">
-          <div class="panel-heading">
-            <h3 class="panel-title">Kui Eugenio</h3>
+        <div class="card card-outline-primary mb-3 text-center">
+          <div class="card-block">
+            <h5 class="card-text">/api/quizzes/&lt user ID &gt</h5>
+            <blockquote class="card-blockquote">
+              <p>GET route for getting all of the quizzes for user ID passed.  Passing the user ID is mandatory.</p>
+            </blockquote>
           </div>
-          <div class="panel-body">
-            Web Developer, Back End
-          </div>
-      </div>      
+        </div>
       </div>
-    </div>
+  </div>
+
+  <div class="card card-outline-primary text-center p-4 my-4">
+      <h3 class="card-title">Admin RESTful routes</h3>
+      <blockquote class="card-blockquote">
+      * This would not show on the public page but only for app administrators. This is shown now for testing and presentation only
+      </blockquote>
+
+      <div class="card-block">  <!-- create question -->
+        <!-- ______________________________________________________________________ -->
+        <div class="card card-outline-info mb-3 text-center"> <!-- create question -->
+          <h5 class="card-text">/questionMaker</h5>
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>CREATE route for creating a new question through your form.  Make sure that a quiz id, question are included in your form</p>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card card-outline-primary mb-3 text-center"><!-- create answer/update question with answer -->  
+          <h5 class="card-text">/answers</h5>
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>UPDATE route for creating a question through your form.  Make sure to include a question Id and answer in your form</p>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card card-outline-primary mb-3 text-center"> <!-- update question -->
+          <h5 class="card-text">/api/question/&lt question ID &gt</h5>          
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>PUT route for updating question with question ID passed.  Passing the question ID is mandatory.</p>
+            </blockquote>
+          </div>
+        </div>          
+        <div class="card card-outline-primary mb-3 text-center"> <!-- delete question --> 
+          <h5 class="card-text">/api/question</h5>
+          <div class="card-block">
+            <blockquote class="card-blockquote">
+              <p>DELETE route for deleting a question through your form.  Make sure to include a question Id in your form</p>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card card-outline-primary mb-3 text-center"> <!-- create quiz -->
+          <div class="card-block">
+            <h5 class="card-text">/newQuiz</h5>
+            <blockquote class="card-blockquote">
+              <p>CREATE route for creating new quiz. Make sure to include user ID and quiz name in your form.</p>
+            </blockquote>
+          </div>
+        </div>
+        <div class="card card-outline-primary mb-3 text-center"> <!-- delete quiz -->
+          <div class="card-block">
+            <h5 class="card-text">/api/quiz/&lt quiz ID &gt</h5>
+            <blockquote class="card-blockquote">
+              <p>DELETE route for deleting quiz with quiz ID passed.  Passing the quiz ID is mandatory.  Make sure to delete all questions linked to this quiz first.</p>
+            </blockquote>
+          </div>
+        </div>  
+        <div class="card card-outline-primary mb-3 text-center"> <!-- update quiz -->
+          <div class="card-block">
+            <h5 class="card-text">/api/quiz/&lt quiz ID &gt</h5>
+            <blockquote class="card-blockquote">
+              <p>PUT route for updating quiz with quiz ID passed.  Passing the quiz ID is mandatory.  Make sure to include quiz ID and quiz name.</p>
+            </blockquote>
+          </div>
+        </div>                
+      </div>
+  </div>
+
 </div> <!-- container -->

@@ -26,7 +26,7 @@ module.exports = function(app) {
     });
   });
 
-  // GET route for getting quizzes for userid 
+  // GET route for getting user information for userid passed
   app.get("/api/user/:id?", function(req, res) {
     var query = {};
     if (req.params.id) {
