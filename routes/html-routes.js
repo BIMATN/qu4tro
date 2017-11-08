@@ -13,6 +13,10 @@ module.exports = function(app) {
     res.render("index");
   });
 
+  app.get("/register", function(req, res){
+    res.render("register");
+  });
+
   // cms route loads cms.handlebars
   app.get("/cms", function(req, res) {
     res.render("cms");
