@@ -73,23 +73,38 @@
     
     {{#if dbQuestion}}
         <div class="row">
-         <ol>
             {{#each dbQuestion}}
-              <div class="panel panel-info p-2">
-                <div class="panel-heading">
-                  <h3 class="panel-title">{{this.dataValues.Question}}</h3>
-                </div>
-                    <div class="panel-body">
-                          <div class="card p-2 d-inline-flex justify-content-start">
-                              <div id="slidecontainer"> 
-                                <input type="range" min="1" max="100" value="5" class="slider" id="myRange">
-                              </div>
-                          </div>
+              <div class="panel panel-info p-2 d-flex w-100">
+                  <div class="d-inline-flex align-items-center">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">{{this.dataValues.Question}}</h4>                  
                     </div>
-              </div>            
+                    <div class="panel-body ml-4">
+                        {{#if (eq this.dataValues.Category "scale")}}
+                              <div id="slidecontainer"> 
+                                <input type="range" min="1" max="100" value="5" class="slider" id="myRange" name="Q"+{{id}}>
+                              </div>
+                        {{/if}}
+                        {{#if (eq this.dataValues.Category "yes-no")}}
+                          <form action="">
+                            <div class="d-inline-flex justify-content-start align-items-center">
+                              <input type="radio" name="Q"+{{id}} class="mx-2" value="no"> No<br>
+                              <input type="radio" name="Q"+{{id}} class="mx-2" value="yes"> Yes<br>
+                            </div>
+                          </form>
+                        {{/if}} 
+                        {{#if (eq this.dataValues.Category "open")}}
+                          <form action="">
+                            <div class="d-inline-flex justify-content-start">
+                              <input type="text" name="Q"+{{id}}>
+                            </div>
+                          </form>
+                        {{/if}}                                                
+                    </div> <!-- panel-body -->
+                  </div>
+              </div> <!-- panel  -->         
             {{/each }}
-        </ol>
-        </div>
+        </div> <!-- row -->
     {{/if}}
 
 </div> <!-- container -->
