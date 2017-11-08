@@ -216,6 +216,22 @@ module.exports = function(app) {
     }
   });
 
+  // post route for registering user
+  app.post("/register", function(req, res) {
+    if (req.body.userName && req.body.password) {
+      db.User.create({
+        user_name : req.body.userName,
+        password : req.body.password
+      }).then(function(data) {
+        console.log("New user: " + JSON.stringify(data));
+        res.render("cms", {userName: data.user_name, userId: data.id})
+      });
+    }
+    else {
+      res.render("register",{registerError: "Please try Again"});
+    };
+  });
+
     // PUT route for updating questions
   app.get("/questions", function(req, res) {
     db.Question.update(
