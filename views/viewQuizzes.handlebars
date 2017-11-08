@@ -41,14 +41,24 @@
   </nav>
 </div>
 <div class="container">
-  <ul>
-    {{#each quizzes}}
-        <div class = "d-flex justify-content-center">
-          <li>
-             {{this.dataValues.quiz_name}} <button type="button" class="btn btn-info btn-sm" data-quizId = {{this.dataValues.id}}>Edit Quiz</button> <button type="button" class="btn btn-danger btn-sm" data-quizId = {{this.dataValues.id}}>Delete Quiz</button>
-          </li>
-        </div>
-    {{/each}}
-  </ul>
+  <div class="row">
+        <h3 class="text-danger"> Your Quizzes </h3>       
+        <div class="card p-4 mb-4 w-100">
+            <div class="card-block">
+              {{#each quizzes}}
+                    <div class="card p-4 mb-4 d-inline-flex justify-content-start">
+                        <h4 class="card-title">{{this.dataValues.quiz_name}}</h4>
+                        <div class="card-block">
+                          <form>
+                          <input type="hidden" name="editQuestions">
+                          <a href="/questions" class="btn btn-primary" data-quizId = {{this.dataValues.id}} name="{{this.dataValues.id}}">Edit</a>
+                          <a href="/questions" class="btn btn-danger" data-quizId = {{this.dataValues.id}}  name="{{this.dataValues.id}}>Delete</a>                  
+                        </div>
+                    </div> <!-- inside cards -->
+              {{/each}} 
+            </div> <!-- main card block -->
+        </div> <!-- main card -->
+  </div> <!-- row -->
+
 </div> <!-- container -->
 <script src="/assets/js/viewQuizzes.js"></script>

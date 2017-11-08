@@ -28,7 +28,7 @@ module.exports = function(app) {
       where: query,
       include: [db.Quiz]
     }).then(function(quizResponse) {
-      console.log(quizResponse[0].dataValues.Quizzes);
+      // console.log("***** quizzes" + quizResponse[0].dataValues.Quizzes);
       res.render("viewQuizzes", {quizzes: quizResponse[0].dataValues.Quizzes})
     });
   });
@@ -53,7 +53,6 @@ module.exports = function(app) {
   app.get("/answers", function(req,res){
     res.render("answers");
   });
-
 
     // route loads quiz-b.handlebars quiz page
   app.get("/quiz", function(req, res) {
@@ -211,5 +210,18 @@ module.exports = function(app) {
       console.log(req.body);
       res.render("answers", {answerError: "Please try again. An answer is required."});
     }
+  });
+
+    // PUT route for updating questions
+  app.get("/questions", function(req, res) {
+    db.Question.update(
+      req.body,
+      {
+        where: {
+          id: req.body.id
+        }
+      }).then(function(dbQuestion) {
+        res.render(req.body.pageName, {dbQuestion:dbQuestion})
+      });
   });
 };
