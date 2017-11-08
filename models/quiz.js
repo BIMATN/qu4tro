@@ -5,8 +5,8 @@ module.exports = function(sequelize, DataTypes) {
   );
 
   Quiz.associate = function(models) {
-    // We're saying that a burger should belong to an customer
-    // but a burger can be created without a customer
+    // We're saying that a question should belong to an quiz
+    // but a quiz can be created without a question
     Quiz.hasMany(models.Question,{     
     });
   };

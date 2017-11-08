@@ -46,7 +46,7 @@
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
         <div class="card-header text-center">Add Your Questions here!</div>
         <div class="card-body text-center">
-          <h4 class="card-title">{{quizName}}</h4>
+          <h4 id="nameTarget" class="card-title">{{quizName}}</h4>
           <div id="questions"></div>
           <form id="questioner" action="/questionMaker" method="POST">
             <div class="form-group col-12 mx-auto">
@@ -54,7 +54,7 @@
                {{#if questionError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{questionError}}</b></p></div>
                   {{/if}}
                <textarea class="form-control" id="question" rows="1" type="text" name="question" placeholder="e.g. How do you get to Carnegie Hall?"></textarea>
-               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{#if nextQuestion}}{{QuizId}}{{else}}{{quizId}}{{/if}}</textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="quizId">{{quizId}}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add Question</button>
           </form>
@@ -62,6 +62,6 @@
       </div>
     </div>
   </div>
-  {{#if nextQuestion}}<div class="row"><div class="col-12 d-flex justify-content-center"><a href="/cms"><button class="btn btn-warning">Complete Test</button></a></div></div>{{/if}}
+  {{#if nextQuestion}}<div class="row"><div class="col-12 d-flex justify-content-center"><a href="/cms"><button id="completeQuiz" class="btn btn-warning">Complete Quiz</button></a></div></div>{{/if}}
 </div> <!-- container -->
 <script src="/assets/js/questionMaker.js"></script>

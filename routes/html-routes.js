@@ -201,11 +201,11 @@ module.exports = function(app) {
         Answer: req.body.answer
       }, {
       where: {
-        id: req.body.questionId
+        id: req.body.questionId,
       }
       }).then(function(answerAdded) {
-        console.log(answerAdded[0].dataValues);
-        //res.render("questionMaker", {QuizId: answerAdded[0].dataValues.QuizId, nextQuestion: true});
+        //add check for change to ensure things went well...future
+        res.render("questionMaker", {nextQuestion: true});
       });
     } else{
       console.log(req.body);
