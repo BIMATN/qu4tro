@@ -40,15 +40,15 @@
     </div>
   </nav>
 </div>
-<div class="container" style="border: 2px red solid">
+<div class="container">
   <ul>
-    {{#each}}
+    {{#each quizzes}}
         <div class = "d-flex justify-content-center">
           <li>
-             {{this.test_name}} <button type="button" class="btn btn-info btn-sm" data-id = {{this.id}}>Edit Test</button>
+             {{this.dataValues.quiz_name}} <button type="button" class="btn btn-info btn-sm" data-quizId = {{this.dataValues.id}}>Edit Test</button>
           </li>
         </div>
     {{/each}}
   </ul>
 </div> <!-- container -->
-<style src="assets/js/viewQuizzes.js"></style>
+<script src="/assets/js/viewQuizzes.js"></script>

@@ -12,8 +12,19 @@ module.exports = function(app) {
     res.render("cms");
   });
 
-  app.get("/viewQuizzes", function(req,res){
-    res.render("viewQuizzes");
+  // get request for quizzes viewing via cms
+  app.get("/viewQuizzes/:id?", function(req, res) {
+    var query = {};
+    if (req.params.id) {
+      query.id = req.params.id;
+    }
+    db.User.findAll({
+      where: query,
+      include: [db.Quiz]
+    }).then(function(quizResponse) {
+      console.log(quizResponse[0].dataValues.Quizzes);
+      res.render("viewQuizzes", {quizzes: quizResponse[0].dataValues.Quizzes})
+    });
   });
 
   // route loads quiz.handlebars when accessed through menu system
@@ -134,7 +145,7 @@ module.exports = function(app) {
     }
   });
 
-  // route for making a new quiz, works with user id and quiz name
+  // route for adding a question to a quiz
   app.post("/questionMaker", function(req, res) {
     if (req.body.quizId && req.body.question) {
       console.log(req.body);
@@ -150,7 +161,7 @@ module.exports = function(app) {
     }
   });
 
-  // route for making a new quiz, works with user id and quiz name
+  // route for adding an answer to a question
   app.post("/answers", function(req, res) {
     if (req.body.questionId && req.body.answer) {
       console.log(req.body);
@@ -161,7 +172,7 @@ module.exports = function(app) {
         id: req.body.questionId
       }
       }).then(function(answerAdded) {
-        res.render("questionMaker", {nextQuestion: true});
+        res.render("questionMaker", {quizId: answerAdded[0].dataValues.QuizId, nextQuestion: true});
       });
     } else{
       console.log(req.body);
