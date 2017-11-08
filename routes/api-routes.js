@@ -41,8 +41,6 @@ module.exports = function(app) {
     });
   });
 
-
-
   // GET route for getting all of the quizzes for a userid passed
   app.get("/api/quizzes/:id?", function(req, res) {
     var query = {};
@@ -56,6 +54,7 @@ module.exports = function(app) {
       res.json(dbQuestion);
     });
   });  
+  
   // POST route for saving a new Question
   app.post("/api/question", function(req, res) {
     db.Question.create({
@@ -68,14 +67,25 @@ module.exports = function(app) {
     });
   });
 
-  // DELETE route for deleting questions
-  app.delete("/api/question/:id", function(req, res) {
+  // DELETE route for deleting a single question from a single quiz
+  app.delete("/api/quiz/:quizid/question/:id", function(req, res) {
     db.Question.destroy({
       where: {
-        id: req.params.id
+        id: req.params.quizid
       }
     }).then(function(dbQuestion) {
       res.json(dbQuestion);
+    });
+  });
+
+  // DELETE route for deleting a single quiz
+  app.delete("/api/quiz/:id", function(req, res) {
+    db.Quiz.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(destroyed) {
+      console.log(destroyed);
     });
   });
 
@@ -92,7 +102,7 @@ module.exports = function(app) {
       });
   });
 
- // route loads quiz.handlebars
+/* // route loads quiz.handlebars
   app.post("/quiz", function(req, res) {
     var query = {};
 
@@ -108,5 +118,5 @@ module.exports = function(app) {
     } else{
       res.render(req.body.pageName, {quizIdError: "Enter Quiz ID."});
     }
-  });  
+  }); */ 
 };
