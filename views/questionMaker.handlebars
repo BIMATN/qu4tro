@@ -43,10 +43,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
-      {{#if nextQuestion}}<a href="/cms"><button class="btn btn-warning">Complete Test</button></a>
-            {{/if}}
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
-        <div class="card-header text-center">Great Job! Now for the questions!</div>
+        <div class="card-header text-center">Add Your Questions here!</div>
         <div class="card-body text-center">
           <h4 class="card-title">{{quizName}}</h4>
           <div id="questions"></div>
@@ -64,5 +62,6 @@
       </div>
     </div>
   </div>
+  {{#if nextQuestion}}<div class="row"><div class="col-12 d-flex justify-content-center"><a href="/cms"><button class="btn btn-warning">Complete Test</button></a></div></div>{{/if}}
 </div> <!-- container -->
 <script src="/assets/js/questionMaker.js"></script>
