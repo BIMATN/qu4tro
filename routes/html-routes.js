@@ -161,7 +161,6 @@ module.exports = function(app) {
     } else{
       res.render("quiz", {quizIdError: "No Quiz id entered. Please try again."});
     }
-
   });
 
   // route for making a new quiz, works with user id and quiz name
@@ -216,32 +215,44 @@ module.exports = function(app) {
     }
   });
 
-  // post route for registering user
-  app.post("/register", function(req, res) {
-    if (req.body.userName && req.body.password) {
-      db.User.create({
-        user_name : req.body.userName,
-        password : req.body.password
-      }).then(function(data) {
-        console.log("New user: " + JSON.stringify(data));
-        res.render("cms", {userName: data.user_name, userId: data.id})
-      });
+    // POST route for getting questions to update
+  app.post("/getQuestions", function(req, res) {
+    var query = {};
+    if (req.body.id) {
+      query.QuizId = req.body.id;
     }
-    else {
-      res.render("register",{registerError: "Please try Again"});//need to add handlebars into page
-    };
-  });
-
-    // PUT route for updating questions
-  app.get("/questions", function(req, res) {
-    db.Question.update(
-      req.body,
+    db.Question.findAll(
       {
-        where: {
-          id: req.body.id
-        }
+        where: query,
+        include: [db.Quiz]
       }).then(function(dbQuestion) {
+        // console.log(JSON.stringify(dbQuestion));
         res.render(req.body.pageName, {dbQuestion:dbQuestion})
       });
   });
+
+  // DELETE route for deleting a single question
+  app.get("/deleteQuestion/:id", function(req, res) {
+    console.log("here");
+
+    db.Question.findAll({
+      where:{
+        id:req.params.id,
+      },
+      include:[db.Quiz]
+    }).then (function(dbQuiz){
+        console.log("quiz id:" + dbQuiz[0].Quiz.id);
+        db.Question.destroy({
+          where: {
+            id: req.params.id
+          }
+        }).then(function(destroyed) {
+          console.log("*** destroyed:" + destroyed);
+          res.render("editQuestions", {successMessage:"Question deleted"}, {quizId:dbQuiz[0].Quiz.id});
+        });
+    });
+
+  });
+
 };
+

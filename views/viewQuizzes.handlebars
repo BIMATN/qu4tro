@@ -48,10 +48,16 @@
                     <div class="card p-4 mb-4 d-inline-flex justify-content-start">
                         <h4 class="card-title">{{this.dataValues.quiz_name}}</h4>
                         <div class="card-block">
-                          <form>
-                          <input type="hidden" name="editQuestions">
-                          <a href="/questions" class="btn btn-primary" data-quizId = {{this.dataValues.id}} name="{{this.dataValues.id}}">Edit</a>
-                          <a href="/questions" class="btn btn-danger" data-quizId = {{this.dataValues.id}}  name="{{this.dataValues.id}}>Delete</a>                  
+                          <form action="/getQuestions" class="w-100" method="POST">
+                            <input type="hidden" name="pageName" value="editQuestions">
+                            <input type="hidden" name="id" value="{{this.dataValues.id}}">
+                            <button type="submit" class="btn btn-primary w-100">Edit</button>
+                          </form>
+                          <form action="/" class="w-100"  method="POST">
+                            <input type="hidden" name="pageName" value="editQuestions">
+                            <input type="hidden" name="id" value="{{this.dataValues.id}}">
+                            <button type="submit" class="btn btn-danger w-100">Delete</button> 
+                          </form>                 
                         </div>
                     </div> <!-- inside cards -->
               {{/each}} 

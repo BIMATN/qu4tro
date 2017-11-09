@@ -1,0 +1,96 @@
+<div class="jumbotron mt-4 bg-info">
+  <div class="d-flex justify-content-center align-items-center">
+    <img class="logo" src = "/assets/img/quatro_logo.png">
+  </div>
+  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
+  <hr class="my-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/cms">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/quiz">Take A Quiz</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/survey">Take A Survey</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/apiInfo">API Information</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" id="logOut" href="/">Log Out</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/cantDoThatHaHa">Un-Register</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>    
+</div>
+<div class="container">
+        <div class="row">
+            {{#if quizIdError }}
+              <h5 class="text-danger"> {{quizIdError}} </h5>
+            {{else unless dbQuestion}}
+              <h4> Questions to delete from Quiz</h4> 
+              <h5>{{successMessage}}</h5>             
+            {{/if}}
+
+            {{#unless dbQuestion}}
+              <h5> no questions to delete from Quiz. You can now delete Quiz {{dbQuestion.Quiz.quiz_name}}. </h5>
+                <form action="/deleteQuiz/{{quizId}}" class="w-100"  method="GET">
+                  <button type="submit" class="btn btn-danger ml-2">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button> 
+                </form>               
+            {{/unless}}  
+
+              <div class="card p-4 mb-4 w-100">
+                  <div class="card-block">
+                    <div class="card-title w-100 text-white p-2 bg-info">
+                        {{#if quiz_name}}
+                          <div class="d-flex justify-content-start w-100"> 
+                            <h2>{{quiz_name}}</h2>
+                            <h2 class="ml-auto">Quiz: {{quizId}}</h2>
+                          </div>                 
+                        {{/if}}                
+                    </div>      
+                  {{#if dbQuestion}}                                 
+                    {{#each dbQuestion}}
+                    <div class="row">
+                      <div class="col-6">
+                          <div class="card-text d-flex w-100 align-content-center justify-content-end">                                    
+                              <span><h5 class="align-text-middle text-right">{{this.dataValues.Question}}</h5></span>
+                          </div>
+                      </div>
+                      <div class="col-6 d-flex align-content-center">
+                          <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
+                              <span class="w-100"><input type="text" value="{{this.dataValues.Answer}}" class="w-100"></span>
+                              <span>
+                                <form action="/deleteQuestion/{{this.dataValues.id}}" class="w-100"  method="GET">
+                                  <button type="submit" class="btn btn-danger ml-2">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                  </button> 
+                                </form>                                 
+                              </span>
+                          </div>
+                      </div>
+                    </div>
+                    {{/each }} 
+                  {{/if}}                                     
+                  </div> <!-- card-block -->
+              </div> <!-- card  -->         
+</div> <!-- container -->
