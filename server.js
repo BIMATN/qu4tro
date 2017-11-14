@@ -47,6 +47,7 @@ app.use(function(req, res, next) {
 // =============================================================
 require("./routes/html-routes.js")(app);
 require("./routes/api-routes.js")(app);
+require("./routes/crud-routes.js")(app);
 
 
 // Syncing our sequelize models and then starting our Express app

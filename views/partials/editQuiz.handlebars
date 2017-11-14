@@ -1,0 +1,22 @@
+<div class="container pull-left">
+        <div class="p-4 mb-4 w-100">
+                <div class="card p-2">
+                    <div class="d-flex justify-content-start">
+                    {{dbQuiz.dataValues}}
+                          <form action="/addQuestions" method="POST">
+                            <input type="hidden" name="quizId" value="{{quizId}}">
+                            <button type="submit" class="btn btn-outline-primary w-100">Add Questions</button>
+                          </form>
+                          <form action="/deleteQuiz" method="POST">
+                            <input type="hidden" name="quizId" value="{{quizId}}">
+                            <button type="submit" class="btn btn-outline-danger w-100">Delete</button> 
+                          </form>   
+                          <div class="ml-3">
+                            <h4>Quiz ID {{quizId}}:  {{quiz_name}}</h4>
+                          </div>                                        
+                    </div>
+                </div>
+        </div>
+
+</div> <!-- container -->
+<script src="/assets/js/viewQuizzes.js"></script>

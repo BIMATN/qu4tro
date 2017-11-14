@@ -26,14 +26,7 @@
           <a class="nav-link" href="/about">About</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" id="takeQuiz" action="/quiz" method="POST">              
-          <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">ID</span>
-            <input type="text" class="form-control" placeholder="quiz id" aria-describedby="basic-addon1" id="quizId" name="quizId">
-            <input type="hidden" name="pageName" value="quiz">
-          </div>    
-          <button type="submit" class="btn btn-outline-primary">Enter</button>   
-      </form>
+
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
@@ -47,44 +40,59 @@
     </div>
   </nav>    
 </div>
-<div class="container">
+<div class="container pull-left">
   <div class="row">
+    <div class="col-lg-3 col-md-3 col-xs-3">
+      <form class="form" id="takeQuiz" action="/quiz" method="POST">              
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">ID</span>
+            <input type="text" class="form-control" placeholder="quiz id" aria-describedby="basic-addon1" id="quizId" name="quizId">
+            <input type="hidden" name="pageName" value="quiz">
+          <button type="submit" class="btn btn-outline-primary">Enter</button>   
+          </div>    
+
+      </form>
+    </div>
+    <div class="col text-center">
       {{#if quizIdError }}
         <h5 class="text-danger"> {{quizIdError}} </h5>
       {{else unless dbQuestion}}
         <h5> Enter Quiz id given by your administrator </h5>              
-      {{/if}}          
-      <div class="card p-4 mb-4 w-100">
-          <div class="card-block">
-            <div class="card-title w-100 text-white p-2 bg-info">
-                {{#if quiz_name}}
-                  <div class="d-flex justify-content-start w-100"> 
-                    <h2>{{quiz_name}}</h2>
-                    <h2 class="ml-auto">Quiz: {{quizId}}</h2>
-                  </div>                 
-                {{/if}}                
-            </div>      
-          {{#if dbQuestion}}                                 
-            {{#each dbQuestion}}
-            <div class="row">
-              <div class="col-6">
-                  <div class="card-text d-flex w-100 align-content-center justify-content-end">                                    
-                      <span><h5 class="align-text-middle text-right">{{this.dataValues.Question}}</h5></span>
-                  </div>
+      {{/if}}
+      {{#if dbQuestion}}          
+        <div class="card p-4 mb-4 w-100">
+            <div class="card-block">
+              <div class="card-title w-100 text-white p-2 bg-info">
+                  {{#if quiz_name}}
+                    <div class="d-flex justify-content-start w-100"> 
+                      <h2>{{quiz_name}}</h2>
+                      <h2 class="ml-auto">Quiz: {{quizId}}</h2>
+                    </div>                 
+                  {{/if}}                
+              </div>      
+            {{#if dbQuestion}}                                 
+              {{#each dbQuestion}}
+              <div class="row">
+                <div class="col-6">
+                    <div class="card-text d-flex w-100 align-content-center justify-content-end">                                    
+                        <span><h5 class="align-text-middle text-right">{{this.dataValues.Question}}</h5></span>
+                    </div>
+                </div>
+                <div class="col-6 d-flex align-content-center">
+                    <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
+                        <span><input type="text" name="{{this.dataValues.Question.id}}"></span>
+                    </div>
+                </div>
               </div>
-              <div class="col-6 d-flex align-content-center">
-                  <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
-                      <span><input type="text" name="{{this.dataValues.Question.id}}"></span>
-                  </div>
-              </div>
-            </div>
-            {{/each }} 
-          {{/if}} 
-          <div class="row d-flex justify-content-center border border-bottom-0 border-left-0 border-right-0">
-            <button class="btn btn-outline-primary my-4">submit</button>
-          </div>                                    
-          </div> <!-- card-block -->
-      </div> <!-- card  -->
+              {{/each }} 
+            {{/if}} 
+            <div class="row d-flex justify-content-center border border-bottom-0 border-left-0 border-right-0">
+              <button class="btn btn-outline-primary my-4">submit</button>
+            </div>                                    
+            </div> <!-- card-block -->
+        </div> <!-- card  -->
+      {{/if}}
+    </div>
   </div>         
 </div> <!-- container -->
 <script src="/assets/js/takeAQuiz.js"></script>

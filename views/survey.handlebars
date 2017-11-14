@@ -26,16 +26,6 @@
             <a class="nav-link" href="/about">About</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" id="takeSurvey" action="/survey" method="POST">
-            {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
-            {{/if}}                
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">ID</span>
-              <input type="text" class="form-control" placeholder="survey id" aria-describedby="basic-addon1" id="surveyId" name="surveyId">
-              <input type="hidden" name="pageName" value="survey">
-            </div>    
-            <button type="submit" class="btn btn-outline-primary">Enter</button>   
-        </form>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
@@ -49,59 +39,75 @@
       </div>
     </nav>    
 </div>
-<div class="container">
+<div class="container pull-left">
   <div class="row">
-    {{#if loginError }}
-      <h5 class="text-danger"> {{loginError}} </h5>
-    {{else unless dbQuestion}}
-      <h5> Enter survey id given by your administrator </h5>              
-    {{/if}}          
-      <div class="card p-4 mb-4 w-100">
-          <div class="card-block">
-            <div class="card-title w-100 text-white p-2 bg-info">
-                {{#if survey_name}}
-                  <div class="d-flex justify-content-start w-100"> 
-                    <h1>{{survey_name}}</h1>
-                    <h2 class="ml-auto">Survey: {{survey_id}}</h2>
-                  </div>                 
-                {{/if}}                
-            </div>      
-          {{#if dbQuestion}}                                 
-            {{#each dbQuestion}}      
-            <div class="card-text d-flex w-75 align-items-center">                                     
-                <h5 class="card-title align-text-middle">{{this.dataValues.Question}}</h5>                        
-                {{#if (eq this.dataValues.Category "scale")}}
-                      <div id="slidecontainer"> 
-                        <input type="range" min="0" max="4" class="slider" id="Q"+{{id}} name="Q"+{{id}}>
-                          <span class="d-inline-flex align-items-start justify-content-between w-100">
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                          </span>                                
-                      </div>
-                {{/if}}
-                {{#if (eq this.dataValues.Category "yes-no")}}
-                  <form action="">
-                    <div class="d-inline-flex justify-content-start align-items-center">
-                      <input type="radio" name="Q"+{{id}} class="mx-2" value="no"> No<br>
-                      <input type="radio" name="Q"+{{id}} class="mx-2" value="yes"> Yes<br>
-                    </div>
-                  </form>
-                {{/if}} 
-                {{#if (eq this.dataValues.Category "open")}}
-                  <form action="">
-                    <div class="d-inline-flex justify-content-start ml-4">
-                      <input type="text" name="Q"+{{id}}>
-                    </div>
-                  </form>
-                {{/if}}                                               
-            </div> <!-- card-text -->
-            {{/each }} 
-          {{/if}}                    
-          </div> <!-- card-block -->
-      </div> <!-- card  --> 
+    <div class="col-lg-3">
+       <form class="form-inline my-2 my-lg-0" id="takeSurvey" action="/survey" method="POST">
+            {{#if quizIdError}}<div class="bg-danger p-2 center-block">{{quizIdError}}</div>
+            {{/if}}                
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">ID</span>
+              <input type="text" class="form-control" placeholder="survey id" aria-describedby="basic-addon1" id="surveyId" name="surveyId">
+              <input type="hidden" name="pageName" value="survey">
+            <button type="submit" class="btn btn-outline-primary">Enter</button>   
+            </div>    
+        </form>
+    </div>
+    <div class="col">    
+        {{#if loginError }}
+          <h5 class="text-danger text-center"> {{loginError}} </h5>
+        {{else unless dbQuestion}}
+          <h5 class="text-center"> Enter survey id given by your administrator </h5>              
+        {{/if}} 
+        {{#if dbQuestion}}          
+          <div class="card p-4 mb-4 w-100">
+              <div class="card-block">
+                <div class="card-title w-100 text-white p-2 bg-info">
+                    {{#if survey_name}}
+                      <div class="d-flex justify-content-start w-100"> 
+                        <h1>{{survey_name}}</h1>
+                        <h2 class="ml-auto">Survey: {{survey_id}}</h2>
+                      </div>                 
+                    {{/if}}                
+                </div>      
+              {{#if dbQuestion}}                                 
+                {{#each dbQuestion}}      
+                <div class="card-text d-flex w-75 align-items-center">                                     
+                    <h5 class="card-title align-text-middle">{{this.dataValues.Question}}</h5>                        
+                    {{#if (eq this.dataValues.Category "scale")}}
+                          <div id="slidecontainer"> 
+                            <input type="range" min="0" max="4" class="slider" id="Q"+{{id}} name="Q"+{{id}}>
+                              <span class="d-inline-flex align-items-start justify-content-between w-100">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                              </span>                                
+                          </div>
+                    {{/if}}
+                    {{#if (eq this.dataValues.Category "yes-no")}}
+                      <form action="">
+                        <div class="d-inline-flex justify-content-start align-items-center">
+                          <input type="radio" name="Q"+{{id}} class="mx-2" value="no"> No<br>
+                          <input type="radio" name="Q"+{{id}} class="mx-2" value="yes"> Yes<br>
+                        </div>
+                      </form>
+                    {{/if}} 
+                    {{#if (eq this.dataValues.Category "open")}}
+                      <form action="">
+                        <div class="d-inline-flex justify-content-start ml-4">
+                          <input type="text" name="Q"+{{id}}>
+                        </div>
+                      </form>
+                    {{/if}}                                               
+                </div> <!-- card-text -->
+                {{/each }} 
+              {{/if}}                    
+              </div> <!-- card-block -->
+          </div> <!-- card  -->
+        {{/if}}
+    </div>
   </div>        
 </div> <!-- container -->
 <script src="/assets/js/takeASurvey.js"></script>

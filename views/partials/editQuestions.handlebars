@@ -5,16 +5,7 @@
             {{else unless dbQuestion}}
               <h4> Questions to delete from Quiz</h4> 
               <h5>{{successMessage}}</h5>             
-            {{/if}}
-
-            {{#unless dbQuestion}}
-              <h5> no questions to delete from Quiz. You can now delete Quiz {{dbQuestion.Quiz.quiz_name}}. </h5>
-                <form action="/deleteQuiz/{{quizId}}" class="w-100"  method="GET">
-                  <button type="submit" class="btn btn-danger ml-2">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </button> 
-                </form>               
-            {{/unless}}  
+            {{/if}} 
 
               <div class="card p-4 mb-4 w-100">
                   <div class="card-block">
@@ -38,7 +29,8 @@
                           <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
                               <span class="w-100"><input type="text" value="{{this.dataValues.Answer}}" class="w-100"></span>
                               <span>
-                                <form action="/deleteQuestion/{{this.dataValues.id}}" class="w-100"  method="GET">
+                                <form action="/deleteQuestion" class="w-100"  method="POST">
+                                <input type="hidden" name="questionId" value="{{this.dataValues.id}}" />
                                   <button type="submit" class="btn btn-danger ml-2">
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                   </button> 
