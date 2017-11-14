@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <div class="card text-white bg-info mb-3 w-50 mx-auto">
+        <div class="card-header text-center">Every quiz needs a name, start yours by choosing one!</div>
+        <div class="card-body text-center">
+          <h4 class="card-title">Quiz Creator</h4>
+          <form  id="quizNamer" action="/newQuiz" method="POST">
+            <div class="form-group col-12 mx-auto">
+               <label for="quizName">Please Enter a Quiz Name</label>
+               {{#if quizNameError}}<div class="d-flex"><p class="text-danger p-2 center-block"><b>{{quizNameError}}</b></p></div>
+                  {{/if}}
+               <textarea class="form-control" id="quizName" rows="1" type="text" name="quizName" placeholder="e.g. A Tale of Two Cities"></textarea>
+               <textarea hidden class="form-control" id="idTarget" type="text" rows="1" name="userId"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- container -->
+<script src="assets/js/createQuizzes.js"></script>

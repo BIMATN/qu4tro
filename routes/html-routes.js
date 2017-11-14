@@ -22,18 +22,19 @@ module.exports = function(app) {
     res.render("cms");
   });
 
-  // get request for quizzes viewing via cms
-  app.get("/viewQuizzes/:id?", function(req, res) {
+  // post request for user's quizzes viewing when passed with userid
+  app.get("/viewQuizzes/:id", function(req, res) {
+    console.log("req:" + req.params.id);
     var query = {};
     if (req.params.id) {
       query.id = req.params.id;
     }
+
     db.User.findAll({
       where: query,
       include: [db.Quiz]
     }).then(function(quizResponse) {
-      // console.log("***** quizzes" + quizResponse[0].dataValues.Quizzes);
-      res.render("viewQuizzes", {quizzes: quizResponse[0].dataValues.Quizzes})
+      res.render("cms", {quizzes: quizResponse[0].dataValues.Quizzes, viewQuiz:true});
     });
   });
 
@@ -46,8 +47,9 @@ module.exports = function(app) {
   app.get("/survey", function(req, res) {
     res.render("survey");
   }); 
+  // returns to cms page to load partial createQuizzes
   app.get("/createQuizzes", function(req,res){
-    res.render("createQuizzes");
+    res.render("cms",{createQuiz:true});
   });
 
   app.get("/questionMaker", function(req,res){
@@ -76,7 +78,6 @@ module.exports = function(app) {
   // when authenticating userName and password passed, if successful, route to cms page else error
   // use post here to "hide" values passed back to route.
   app.post("/authenticate", function(req, res) {
-    console.log(req.body);
     var query = {};
     if (req.body.userName && req.body.password) {
       query = { user_name : req.body.userName,
@@ -84,7 +85,6 @@ module.exports = function(app) {
       db.User.findAll({
         where:query
       }).then(function(data) {
-        console.log("data : " + JSON.stringify(data));
         //console.log("user_name : " + data[0].user_name);      
         if (!data || !data.length){
           res.render("index",{loginError: "Incorrect Username and/or password."});
@@ -93,7 +93,7 @@ module.exports = function(app) {
         }
       });
     } else {
-      res.render("index",{loginError: "Incorrect Username and/or password."});
+      res.render("index",{loginError: "Please enter Username and password."});
     }
   });
 

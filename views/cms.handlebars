@@ -1,4 +1,27 @@
-<div class="jumbotron mt-4 bg-info">
+<style>
+  .vertical-menu {
+      width: 200px;
+  }
+
+  .vertical-menu a {
+      background-color: #eee;
+      color: black;
+      display: block;
+      padding: 12px;
+      text-decoration: none;
+  }
+
+  .vertical-menu a:hover {
+      background-color: #ccc;
+  }
+
+  .vertical-menu a.active {
+      background-color: #4CAF50;
+      color: white;
+  }
+</style>
+
+<div class="jumbotron m-0 bg-info">
   <div class="d-flex justify-content-center align-items-center">
     <img class="logo" src = "/assets/img/quatro_logo.png">
   </div>
@@ -39,17 +62,28 @@
     </div>
   </nav>
 </div>
-<div class="container">
   <div class="row">
-    <div class="col-4 mx-auto">
-      <a class="d-flex justify-content-center" href="/createQuizzes"><button type="button" class="btn-lg btn-info w-75">Create A Quiz</button></a>
+    <div class="col-4 mx-auto justify-contents-start">
+
+      <div class="vertical-menu ">
+        <a href="/createQuizzes">Create a Quiz</a>
+        <form action="/viewQuizzes" method="GET">
+          <input name="id" class="userId" value="{{userId}}" type="hidden">
+          <a href="/viewQuizzes/{{userID}}" id="viewQuizzes" type="submit">View Quizzes</a>
+        </form>
+        <a class="disabled">Analyze resutls</a>
+      </div>
     </div>
-    <div class="col-4 mx-auto">
-      <a class="d-flex justify-content-center" id="view" href="" ><button type="button" class="btn-lg btn-info w-75">View Quizzes</button></a>
+    <div class="col-8 mx-auto justify-contents-start" id="menuContent">
+      {{#if viewQuiz}}
+        {{#>viewQuizzes }}
+        {{/viewQuizzes }}
+      {{ else if createQuiz}}
+        {{#>createQuizzes }}
+        {{/createQuizzes }}
+      {{/if}}  
     </div>
-    <div class="col-4 mx-auto">
-      <a class="d-flex justify-content-center" id="review" href="#"><button type="button" class="btn-lg btn-info w-75">Analyze Results</button></a>
-    </div>
+
   </div>
-</div> <!-- container -->
+
 <script src="/assets/js/cms.js"></script>
