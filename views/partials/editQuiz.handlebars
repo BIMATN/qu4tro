@@ -3,10 +3,10 @@
                 <div class="card p-2">
                     <div class="d-flex justify-content-start">
                     {{dbQuiz.dataValues}}
-                          <form action="/addQuestions" method="POST">
-                            <input type="hidden" name="quizId" value="{{quizId}}">
-                            <button type="submit" class="btn btn-outline-primary w-100">Add Questions</button>
-                          </form>
+
+                            <button type="submit" class="btn btn-outline-primary" 
+                            data-toggle="modal" data-target="#addQuestion">Add Questions</button>
+
                           <form action="/deleteQuiz" method="POST">
                             <input type="hidden" name="quizId" value="{{quizId}}">
                             <button type="submit" class="btn btn-outline-danger w-100">Delete</button> 

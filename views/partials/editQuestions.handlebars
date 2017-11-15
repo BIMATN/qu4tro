@@ -1,3 +1,4 @@
+ 
 <div class="container">
         <div class="row">
             {{#if quizIdError }}
@@ -19,28 +20,29 @@
                     </div>      
                   {{#if dbQuestion}}                                 
                     {{#each dbQuestion}}
-                    <div class="row">
-                      <div class="col-6">
-                          <div class="card-text d-flex w-100 align-content-center justify-content-end">                                    
-                              <span><h5 class="align-text-middle text-right">{{this.dataValues.Question}}</h5></span>
-                          </div>
-                      </div>
-                      <div class="col-6 d-flex align-content-center">
-                          <div class="card-text d-flex w-75 align-items-center justify-content-start">                                     
-                              <span class="w-100"><input type="text" value="{{this.dataValues.Answer}}" class="w-100"></span>
-                              <span>
-                                <form action="/deleteQuestion" class="w-100"  method="POST">
-                                <input type="hidden" name="questionId" value="{{this.dataValues.id}}" />
-                                  <button type="submit" class="btn btn-danger ml-2">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    <div class="row d-flex align-content-center h-100"">
+                          <div class="col-lg-3 d-inline-flex justify-content-end mt-2 h-50">
+                                <button type="button" class="btn btn-outline-warning ml-2 editQuestion" data-id="{{this.dataValues.id}}" data-toggle="modal" data-target="#modalEditQuestion">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                </button>                               
+                                  <form action="/deleteQuestion" method="POST" class="">
+                                  <input type="hidden" name="questionId" value="{{this.dataValues.id}}" />
+                                    <button type="submit" class="btn btn-outline-danger ml-2 h-100">
+                                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button> 
+                                  </form>                                 
+                                  <button type="submit" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#modalQuestion">
+                                      <i class="fa fa-plus" aria-hidden="true"></i>
                                   </button> 
-                                </form>                                 
-                              </span>
-                          </div>
-                      </div>
+                          </div>                       
+                          <div class="col-lg-9 borders">
+                            <h5 class="w-100" id="question_{{this.dataValues.id}}">Q: {{this.dataValues.Question}}</h5>
+                            <h5 class="w-100" id="answer_{{this.dataValues.id}}">A: {{this.dataValues.Answer}}</h5>
+                          </div>                         
                     </div>
                     {{/each }} 
                   {{/if}}                                     
                   </div> <!-- card-block -->
               </div> <!-- card  -->         
 </div> <!-- container -->
+<script src="/assets/js/editQuestions.js"></script>

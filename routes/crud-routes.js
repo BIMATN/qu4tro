@@ -171,7 +171,26 @@ module.exports = function(app) {
       });
     } else{
       console.log(req.body);
-      res.render("createQuizzes", {quizNameError: "Please try again. A quiz name is required."});
+      res.render("createQuizzes", {errorMessage: "Please try again. A quiz name is required."});
+    }
+  });
+
+  // route for making a new quiz, works with user id and quiz name
+  app.post("/addQA", function(req, res) {
+    console.log("***:" + req.body.quizId);
+    console.log("***:" + req.body.question);
+    console.log("***:" + req.body.answer);
+            
+    if (req.body.quizId  && req.body.question && req.body.answer) {
+      db.Question.create({
+      QuizId: parseInt(req.body.quizId),
+      Question: req.body.question,
+      Answer:req.body.answer
+      }).then(function(data) {
+        res.render("cms", {successMessage:"question added to quiz", addAnotherQuestion:true, quizId: req.body.quizId});
+      });
+    } else{
+      res.render("cms", {errorMessage: "Please try again. A quiz name and its answer are required."});
     }
   });
 
@@ -232,6 +251,25 @@ module.exports = function(app) {
       });
   });
 
+     // POST route for updating a question when passed question id, question and answer
+  app.post("/editQuestion", function(req, res) {
+    var query = {};
+    if (req.body.id) {
+      query.id = req.body.id;
+    }
+
+      db.Question.update({
+        Question:req.body.question,        
+        Answer: req.body.answer
+      }, {
+      where: {
+        id: req.body.id}
+      }).then(function(dbQuestion) {
+        // console.log(JSON.stringify(dbQuestion));
+        res.render("cms", {successMessage:"updated Question and Answer for Quiz ID:" + req.body.quizId, quizId:req.body.quizId})
+      });
+  }); 
+
   // DELETE route for deleting a single question
   app.post("/deleteQuestion", function(req, res) {
 
@@ -246,7 +284,7 @@ module.exports = function(app) {
 
   });
 
-    // DELETE route for deleting a quiz
+    // DELETE route for deleting a quiz *
   app.post("/deleteQuiz", function(req, res) {
 
           db.Quiz.destroy({
