@@ -5,11 +5,12 @@
                     <div class="d-flex justify-content-start">
                           <form action="/editQuiz" method="POST">
                             <input type="hidden" name="pageName" value="editQuestions">
-                            <input type="hidden" name="quizId" value="{{this.dataValues.id}}">
+                            <input type="hidden" name="quizId" value="{{this.id}}">                            
                             <button type="submit" class="btn btn-outline-primary w-100">Edit</button>
                           </form>  
-                          <div class="ml-3">
-                            <h4>{{this.dataValues.quiz_name}}</h4>
+                          <div class="ml-3 d-flex justify-content-between w-100">
+                            <h4>{{this.quiz_name}}</h4>
+                            <h4>Quiz ID: {{this.id}}</h4>
                           </div>                                        
                     </div>
                 </div>

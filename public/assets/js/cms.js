@@ -10,10 +10,13 @@ $(function(){
 	else{
 		$("#navbarDropdown").text("Welcome, "+ sessionStorage.userName);
 		$("#view").attr("href", "/viewQuizzes/"+sessionStorage.userId);
-		$(".userID").attr("value", sessionStorage.userID);
+		// $(".userID").attr("value", sessionStorage.userID);
 
 
 	};
+	// set userid for any hidden form inputs
+	$("#USERID").val(sessionStorage.userId); 
+
 	$("#item1").on("click", function(){
 		sessionStorage.clear();
 	});

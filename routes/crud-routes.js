@@ -9,18 +9,27 @@ var Cryptr = require('cryptr'),
 
 module.exports = function(app) {
   // post request for user's quizzes viewing when passed with userid *
-  app.get("/viewQuizzes/:id", function(req, res) {
-    console.log("req:" + req.params.id);
+  app.post("/viewQuizzes", function(req, res) {
     var query = {};
-    if (req.params.id) {
-      query.id = req.params.id;
+    if (req.body.userId) {
+      query.userId = req.body.userId;
     }
 
-    db.User.findAll({
-      where: query,
-      include: [db.Quiz]
+    db.Quiz.findAll({
+      where: {userId : req.body.userId},
+      include: [db.User]
     }).then(function(quizResponse) {
-      res.render("cms", {quizzes: quizResponse[0].dataValues.Quizzes, viewQuiz:true});
+      if (quizResponse.length)
+        res.render("cms", {
+          successMessage:"Quizzes for " + quizResponse[0].User.user_name,
+          quizzes: quizResponse, 
+          viewQuiz:true
+        });
+    // res.json(quizResponse);
+      else
+        res.render("cms", {
+          errorMessage:"No Quizzes for " + quizResponse[0].User.user_name
+        });
     });
   });
 
@@ -69,6 +78,7 @@ module.exports = function(app) {
         if (!data || !data.length){
           res.render("index",{loginError: "Incorrect Username and/or password."});
         } else{
+          console.log("**** userid:" + data[0].id)
           res.render("cms",{userName: data[0].user_name, userId: data[0].id});
         }
       });
@@ -251,7 +261,7 @@ module.exports = function(app) {
       });
   });
 
-     // POST route for updating a question when passed question id, question and answer
+     // POST route for updating a quiz name when passed quiz id, new quiz name
   app.post("/editQuestion", function(req, res) {
     var query = {};
     if (req.body.id) {
@@ -284,6 +294,35 @@ module.exports = function(app) {
       });
   }); 
 
+     // POST route for updating a question when passed question id, question and answer
+  app.post("/editQuizName", function(req, res) {
+    var query = {};
+    if (req.body.quizId) {
+      query.id = req.body.quizId;
+    }
+
+      db.Quiz.update({
+        quiz_name:req.body.quiz_name
+      }, {
+      where: {id:req.body.quizId}
+      }).then(function(dbQuestion) {
+
+        db.Question.findAll(
+          {
+            where: {QuizId:req.body.quizId},
+            include: [db.Quiz]
+          }).then(function(dbQuestion) {
+            // console.log(JSON.stringify(dbQuestion));
+            res.render("cms", {
+              successMessage:"updated quiz name for Quiz ID:" + req.body.quizId, 
+              dbQuestion:dbQuestion, 
+              quiz_name: dbQuestion[0].dataValues.Quiz.quiz_name,
+              quizId:req.body.quizId, 
+              editQuestions:true})            
+          });
+      });
+  });
+
   // DELETE route for deleting a single question
   app.post("/deleteQuestion", function(req, res) {
 
@@ -306,8 +345,20 @@ module.exports = function(app) {
               id: req.body.quizId
             }
           }).then(function(destroyed) {
-            console.log("*** destroyed:" + destroyed);
-            res.render("cms", {successMessage:"Quiz ID:" + req.body.quizId + " deleted."});
+
+              var query = {};
+              if (req.params.id) {
+                query.id = req.body.id;
+              }
+
+              db.Quiz.findAll({
+                where: query,
+                include: [db.User]
+              }).then(function(quizResponse) {
+                res.render("cms", {
+                  successMessage:"Quiz ID:" + req.body.quizId + " deleted.", 
+                  quizzes: quizResponse, viewQuiz:true});
+              });
           });
 
   });

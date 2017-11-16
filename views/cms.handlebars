@@ -1,79 +1,87 @@
-<div class="jumbotron m-0 bg-info">
-  <div class="d-flex justify-content-center align-items-center">
-    <img class="logo" src = "/assets/img/quatro_logo.png">
+<!-- *** main jumbotron *** -->
+  <div class="jumbotron m-0 bg-info">
+    <div class="d-flex justify-content-center align-items-center">
+      <img class="logo" src = "/assets/img/quatro_logo.png">
+    </div>
+    <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
+    <hr class="my-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/cms">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quiz">Take A Quiz</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/survey">Take A Survey</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/apiInfo">API Information</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Welcome, {{userName}}</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" id="item1" href="/">Sign Out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class = "container">
+      <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <form action="/createQuizzes" class="form" method="GET">
+                <button class="btn btn-primary" id="createQuizzes" type="submit">Create Quizzes</button>
+              </form> 
+            </li>
+            <li class="nav-item">
+               <form action="/viewQuizzes" method="POST">
+                  <input name="userId" id="USERID" type="hidden">
+                  <button class="btn btn-warning" type="submit">View Quizzes</button>
+                </form>
+            </li>
+          </ul>
+        </div>
+      </nav>  
+    </div>  
   </div>
-  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
-  <hr class="my-4">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/cms">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/quiz">Take A Quiz</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/survey">Take A Survey</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/apiInfo">API Information</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Welcome, {{userName}}</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" id="item1" href="/">Sign Out</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" id="item2" href="/cantDoThatHaHa">Un-Register</a>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
 
-  <div class="row">
-    <div class="col-2">
-      <div class="vertical-menu ml-4 mt-2">
-        <a href="/createQuizzes">Create a Quiz</a>
-        <form action="/viewQuizzes" method="GET">
-          <input name="id" class="userId" value="{{userId}}" type="hidden">
-          <a href="/viewQuizzes/{{userID}}" id="viewQuizzes" type="submit">View Quizzes</a>
-        </form>
-      </div>
-    </div>
-    <div class="col">
-      <div id="menuContent">
-        {{#if successMessage}}
-          <h3 class="text-center">{{successMessage}}</h3>
-        {{ else if errorMessage}}
-          <h3 class="text-center">{{errorMessage}}</h3>
+<!-- *** main content *** -->
+  <div class="container>"
+    <div id="menuContent">
+      {{#if successMessage}}
+        <h3 class="text-center">{{successMessage}}</h3>
+      {{ else if errorMessage}}
+        <h3 class="text-center">{{errorMessage}}</h3>
+      {{/if}}
+      {{#if viewQuiz}}       
+        {{#>viewQuizzes }}
+        {{/viewQuizzes }}
+      {{ else if createQuiz}}
+        {{#>createQuizzes }}
+        {{/createQuizzes }}
+      {{ else if editQuestions}}
+        {{#if loginError}}
+          <h3 class="text-center">{{loginError}}</h3> <!-- if no questions returned, edit quiz -->
+          {{#>editQuiz}}
+          {{/editQuiz}}             
+        {{else}}
+          {{#>editQuestions}}
+          {{/editQuestions}}  
         {{/if}}
-        {{#if viewQuiz}}        
-          {{#>viewQuizzes }}
-          {{/viewQuizzes }}
-        {{ else if createQuiz}}
-          {{#>createQuizzes }}
-          {{/createQuizzes }}
-        {{ else if editQuestions}}
-          {{#if loginError}}
-            <h3 class="text-center">{{loginError}}</h3> <!-- if no questions returned, edit quiz -->
-            {{#>editQuiz}}
-            {{/editQuiz}}             
-          {{else}}
-            {{#>editQuestions}}
-            {{/editQuestions}}  
-          {{/if}}
-        {{/if}}  
-      </div>
+      {{/if}}  
     </div>
   </div>
 
@@ -146,7 +154,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/editQuestion" method="POST" class="w-100">
+        <form action="/editQuizName" method="POST" class="w-100">
           <input type="hidden" name="quizId" value="{{quizId}}" />
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon">Quiz Name</div>
