@@ -265,8 +265,22 @@ module.exports = function(app) {
       where: {
         id: req.body.id}
       }).then(function(dbQuestion) {
-        // console.log(JSON.stringify(dbQuestion));
-        res.render("cms", {successMessage:"updated Question and Answer for Quiz ID:" + req.body.quizId, quizId:req.body.quizId})
+
+        db.Question.findAll(
+          {
+            where: {QuizId:req.body.quizId},
+            include: [db.Quiz]
+          }).then(function(dbQuestion) {
+            // console.log(JSON.stringify(dbQuestion));
+            res.render("cms", {
+              successMessage:"updated Question and Answer for Quiz ID:" + req.body.quizId, 
+              dbQuestion:dbQuestion, 
+              quiz_name: dbQuestion[0].dataValues.Quiz.quiz_name,
+              quizId:req.body.quizId, 
+              editQuestions:true})            
+          });
+          console.log("qname:" + dbQuestion[0].dataValues.Quiz.quiz_name);
+        
       });
   }); 
 

@@ -4,12 +4,13 @@ $(".editQuestion").on( "click", function() {
     var question = $("#question_" + questionId).text();
     var answer = $("#answer_" + questionId).text(); 
 
-
-    // $("#editModalQuestion").val($("#question"+questionId).val());
-    // $("#editModalAnswer").val($("#answer"+questionId).val());
-
     $("#editModalQuestion").val(question.substring(3)); 
     $("#editModalAnswer").val(answer.substring(3)); 
     $("#editModalQuestionId").val(questionId);      
   });
 
+$(".editQuizName").on( "click", function() {
+    var quiz_name = $("#quiz_name").text();
+
+    $("#editModalQuizName").val(quiz_name); 
+  });

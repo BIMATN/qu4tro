@@ -56,7 +56,8 @@
           <h3 class="text-center">{{successMessage}}</h3>
         {{ else if errorMessage}}
           <h3 class="text-center">{{errorMessage}}</h3>
-        {{ else if viewQuiz}}        
+        {{/if}}
+        {{#if viewQuiz}}        
           {{#>viewQuizzes }}
           {{/viewQuizzes }}
         {{ else if createQuiz}}
@@ -110,12 +111,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/editQuestion" method="POST">
+        <form action="/editQuestion" method="POST" class="w-100">
           <input type="hidden" name="quizId" value="{{quizId}}"/>
           <input type="hidden" name="id" id="editModalQuestionId"/>
-          <input type="text" placeholder="enter question here" name="question" class="w-100" id="editModalQuestion"/>
-          <input type="text" placeholder="enter answer here" name="answer" class="w-100" id="editModalAnswer"/>          
-          <button type="submit" class="btn btn-outline-primary center-block mt-4">Save changes</button>
+
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">Q</div>
+            <input type="text" placeholder="enter question here" name="question" class="w-100" id="editModalQuestion"/>
+          </div>
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">A</div>
+            <input type="text" placeholder="enter answer here" name="answer" class="w-100" id="editModalAnswer"/>   
+          </div>
+
+          <div class="d-flex justify-content-center w-100">
+            <button type="submit" class="btn btn-outline-primary mt-4">Save changes</button>
+          </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -124,4 +135,33 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="modalEditQuizName">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Quiz name for Quiz ID: {{quizId}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/editQuestion" method="POST" class="w-100">
+          <input type="hidden" name="quizId" value="{{quizId}}" />
+          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+            <div class="input-group-addon">Quiz Name</div>
+          <input type="text" placeholder="enter quiz name here" name="quiz_name" class="w-100" id="editModalQuizName"/> 
+          </div>
+          <div class="d-flex justify-content-center w-100">     
+            <button type="submit" class="btn btn-outline-primary mt-4">Save changes</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="/assets/js/cms.js"></script>

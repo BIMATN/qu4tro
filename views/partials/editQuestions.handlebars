@@ -4,7 +4,6 @@
             {{#if quizIdError }}
               <h5 class="text-danger"> {{quizIdError}} </h5>
             {{else unless dbQuestion}}
-              <h4> Questions to delete from Quiz</h4> 
               <h5>{{successMessage}}</h5>             
             {{/if}} 
 
@@ -12,9 +11,16 @@
                   <div class="card-block">
                     <div class="card-title w-100 text-white p-2 bg-info">
                         {{#if quiz_name}}
-                          <div class="d-flex justify-content-start w-100"> 
-                            <h2>{{quiz_name}}</h2>
-                            <h2 class="ml-auto">Quiz: {{quizId}}</h2>
+                          <div class="d-flex justify-content-between w-100"> 
+                            <h2 id="quiz_name">{{quiz_name}}
+                                <button type="button" class="btn btn-secondary ml-2 editQuizName" data-id="{{quizId}}" data-toggle="modal" data-target="#modalEditQuizName">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                            </h2>
+                            <h2>Quiz: {{quizId}}</h2>
+                            <button type="submit" class="btn btn-secondary ml-2 h-50" data-toggle="modal" data-target="#modalQuestion">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>                         
                           </div>                 
                         {{/if}}                
                     </div>      
@@ -31,9 +37,6 @@
                                       <i class="fa fa-trash-o" aria-hidden="true"></i>
                                     </button> 
                                   </form>                                 
-                                  <button type="submit" class="btn btn-outline-primary ml-2" data-toggle="modal" data-target="#modalQuestion">
-                                      <i class="fa fa-plus" aria-hidden="true"></i>
-                                  </button> 
                           </div>                       
                           <div class="col-lg-9 borders">
                             <h5 class="w-100" id="question_{{this.dataValues.id}}">Q: {{this.dataValues.Question}}</h5>
