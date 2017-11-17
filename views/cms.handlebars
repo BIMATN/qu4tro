@@ -1,63 +1,3 @@
-<!-- *** main jumbotron *** -->
-  <div class="jumbotron m-0 bg-info">
-    <div class="d-flex justify-content-center align-items-center">
-      <img class="logo" src = "/assets/img/quatro_logo.png">
-    </div>
-    <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
-    <hr class="my-4">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse d-flex align-content-center" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/cms">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/quiz">Take A Quiz</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/survey">Take A Survey</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/apiInfo">API Information</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/about">About</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Quizzes</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a href="/createQuizzes" class="btn" id="createQuizzes">New Quizzes</a>
-               <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
-                  <input name="userId" id="USERID" type="hidden" value={{userId}}>
-                  <a class="btn" id="btnViewQuiz">View Quizzes</a>
-                </form>
-            </div>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Surveys</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a href="/createQuizzes" class="btn disabled" id="createQuizzes">New Surveys</a>
-               <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
-                  <input name="userId" id="USERID" type="hidden" value={{userId}}>
-                  <a class="btn disabled" id="btnViewQuiz">View Surveys</a>
-                </form>
-            </div>
-          </li>
-
-        </ul>
-        <span class="navbar-text ml-auto mr-4">
-          <p style="margin:0"><span id="menuWelcome">Welcome, <span id="user_name">{{userName}}</span></span>
-            <a href="/" class="btn" id="signOut"><i class="fa fa-sign-out" aria-hidden="true"></i></a></p>
-        </span>        
-      </div>
-    </nav> 
-  </div>
-
 <!-- *** main content *** -->
   <div class="container>"
     <div id="mainContent">
@@ -81,6 +21,9 @@
           {{#>editQuestions}}
           {{/editQuestions}}  
         {{/if}}
+      {{ else }} <!-- show default content if just logged in -->
+          {{#>defaultLanding}}
+          {{/defaultLanding}}
       {{/if}}  
     </div>
   </div>
@@ -173,3 +116,4 @@
 </div>
 
 <script src="/assets/js/cms.js"></script>
+<script src="/assets/js/authenticated.js"></script>

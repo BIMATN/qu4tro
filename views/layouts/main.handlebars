@@ -14,10 +14,76 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- links for fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+	<!-- local stylesheets -->
 	<link rel="stylesheet" href="/assets/css/styles.css" type="text/css" />	
-	<link rel="stylesheet" href="/assets/css/sidemenu.css" type="text/css" />			
+	<link rel="stylesheet" href="/assets/css/authMenu.css" type="text/css" />			
 </head>
 	<body>
+		<!-- *** main jumbotron *** -->
+		<div class="jumbotron mt-4 bg-info">
+		  <div class="d-flex justify-content-center align-items-center">
+		    <img class="logo" src = "/assets/img/quatro_logo.png">
+		  </div>
+		  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
+		  <hr class="my-4">
+		  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		      <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		      <ul class="navbar-nav mr-auto">
+		        <li class="nav-item">
+		          <a class="nav-link" id="home" href="/">Home</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="/quiz">Take A Quiz</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="/survey">Take A Survey</a>
+		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link" href="/apiInfo">API Information</a>
+		        </li>
+		        <li class="nav-item dropdown authenticated">
+		          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Quizzes</a>
+		          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		              <a href="/createQuizzes" class="btn" id="createQuizzes">New Quizzes</a>
+		             <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
+		                <input name="userId" id="USERID" type="hidden" value={{userId}}>
+		                <a class="btn" id="btnViewQuiz">Edit Quizzes</a>
+		              </form>
+		          </div>
+		        </li>
+
+		        <li class="nav-item dropdown authenticated">
+		          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Surveys</a>
+		          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+		              <a href="/createQuizzes" class="btn disabled" id="createQuizzes">New Surveys</a>
+		             <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
+		                <input name="userId" id="USERID" type="hidden" value={{userId}}>
+		                <a class="btn disabled" id="btnViewQuiz">Edit Surveys</a>
+		              </form>
+		          </div>
+		        </li>    
+		        <li class="nav-item">
+		          <a class="nav-link" href="/about">About</a>
+		        </li>		            
+		      </ul>
+		      <span class="navbar-text ml-auto mr-4 loggedOutOnly">
+		      	<a type="button" class="btn" data-toggle="modal" data-target="#loginModal">login</a>
+      		  </span>
+		      <span class="navbar-text ml-auto mr-4 authenticated" >
+		        <p style="margin:0"><span id="menuWelcome">Welcome, <span id="user_name">{{userName}}</span></span>
+		          <a href="/" class="btn" id="signOut"><i class="fa fa-sign-out" aria-hidden="true"></i></a></p>
+		      </span> 
+		    </div>
+		  </nav>
+		</div>
+
 		{{{ body }}}
 		<footer class="footer">
 	      <div class="container">
