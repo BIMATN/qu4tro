@@ -3,10 +3,12 @@ $( document ).ready(function() {
 	if(sessionStorage.user_name){
 		$(".authenticated").show();
 		$(".loggedOutOnly").hide();
+		console.log("set");
 	}
 	else{
 		$(".authenticated").hide();
-		$(".loggedOutOnly").show();		
+		$(".loggedOutOnly").show();	
+		console.log("not set");	
 	};
 	
  	$("#signOut").on("click", function(){
