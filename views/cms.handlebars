@@ -9,7 +9,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse d-flex align-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a class="nav-link" href="/cms">Home</a>
@@ -26,37 +26,36 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Welcome, {{userName}}</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Quizzes</a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" id="item1" href="/">Sign Out</a>
+                <a href="/createQuizzes" class="btn" id="createQuizzes">New Quizzes</a>
+               <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
+                  <input name="userId" id="USERID" type="hidden" value={{userId}}>
+                  <a class="btn" id="btnViewQuiz">View Quizzes</a>
+                </form>
             </div>
           </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- *** submenus only for logged in users *** -->
-    <div class = "container">
-      <nav class="navbar navbar-expand-lg">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <form action="/createQuizzes" class="form" method="GET">
-                <button class="btn btn-primary" id="createQuizzes" type="submit">Create Quizzes</button>
-              </form> 
-            </li>
-            <li class="nav-item">
-               <form action="/viewQuizzes" method="POST">
-                  <input name="userId" id="USERID" type="hidden">
-                  <button class="btn btn-warning" type="submit">View Quizzes</button>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" data-userid={{userId}} data-username={{userName}} aria-haspopup="true" aria-expanded="false">Surveys</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a href="/createQuizzes" class="btn disabled" id="createQuizzes">New Surveys</a>
+               <form action="/viewQuizzes" method="POST" id="frmViewQuiz">
+                  <input name="userId" id="USERID" type="hidden" value={{userId}}>
+                  <a class="btn disabled" id="btnViewQuiz">View Surveys</a>
                 </form>
-            </li>
-          </ul>
-        </div>
-      </nav>  
-    </div>  
+            </div>
+          </li>
+
+        </ul>
+        <span class="navbar-text ml-auto mr-4">
+          <p style="margin:0"><span id="menuWelcome">Welcome, <span id="user_name">{{userName}}</span></span>
+            <a href="/" class="btn" id="signOut"><i class="fa fa-sign-out" aria-hidden="true"></i></a></p>
+        </span>        
+      </div>
+    </nav> 
   </div>
 
 <!-- *** main content *** -->

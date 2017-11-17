@@ -1,7 +1,9 @@
 $(function(){
-	$("#navbarDropdown").text("Welcome, "+sessionStorage.userName);
-	$("#idTarget").text(sessionStorage.userId);
-	$("#item1").on("click", function(){
-		sessionStorage.clear();
-	})
+	if(name){
+		sessionStorage.setItem("userName", name);
+		sessionStorage.setItem("userId", id);
+	}
+	else{
+		$("#menuWelcome").text("Welcome, "+ sessionStorage.userName);
+	};
 })

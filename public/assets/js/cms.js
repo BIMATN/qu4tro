@@ -1,26 +1,26 @@
-$(function(){
-	$("#viewQuizzes").attr("href", "/viewQuizzes/"+sessionStorage.userId);			
-	let name = $("#navbarDropdown").data("username");
-	let id = $("#navbarDropdown").data("userid");
-	if(name){
-		sessionStorage.setItem("userName", name);
-		sessionStorage.setItem("userId", id);
-		$("#view").attr("href", "/viewQuizzes/"+id);
+$( document ).ready(function() {
+
+	// set session Storage to "remember" user name and user id
+	if(!sessionStorage.user_name){
+		sessionStorage.setItem("user_name", $("#user_name").text());
+		sessionStorage.setItem("userId", $("#USERID").val());		
 	}
 	else{
-		$("#navbarDropdown").text("Welcome, "+ sessionStorage.userName);
-		$("#view").attr("href", "/viewQuizzes/"+sessionStorage.userId);
-		// $(".userID").attr("value", sessionStorage.userID);
-
-
+		// $("#menuWelcome").text("Welcome, "+ sessionStorage.userName);
+		$("#user_name").text(sessionStorage.user_name);
+		// set userid for any hidden form inputs
+		$("#USERID").val(sessionStorage.userId);
 	};
-	// set userid for any hidden form inputs
-	$("#USERID").val(sessionStorage.userId); 
+ 
 
-	$("#item1").on("click", function(){
+	$("#signOut").on("click", function(){
 		sessionStorage.clear();
 	});
-})
 
+	$("#btnViewQuiz").on("click", function(){
+		$("#frmViewQuiz").submit();
+	});
+
+});
 
 
