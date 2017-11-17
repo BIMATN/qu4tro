@@ -37,6 +37,7 @@
         </ul>
       </div>
     </nav>
+    <!-- *** submenus only for logged in users *** -->
     <div class = "container">
       <nav class="navbar navbar-expand-lg">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -60,7 +61,7 @@
 
 <!-- *** main content *** -->
   <div class="container>"
-    <div id="menuContent">
+    <div id="mainContent">
       {{#if successMessage}}
         <h3 class="text-center">{{successMessage}}</h3>
       {{ else if errorMessage}}
@@ -96,7 +97,7 @@
       </div>
       <div class="modal-body">
         <form action="/addQA" method="POST">
-          <input type="hidden" name="quizId"/>
+          <input type="hidden" name="quizId" id="modalQuestionQuizId"/>
           <input type="text" placeholder="enter question here" name="question" class="w-100" id="modalQuestion"/>
           <input type="text" placeholder="enter answer here" name="answer" class="w-100" id="modalanswer"/>          
           <button type="submit" class="btn btn-outline-primary center-block mt-4">Save changes</button>

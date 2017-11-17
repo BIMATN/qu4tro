@@ -18,3 +18,7 @@ $(function(){
 	    );
 	});
 })
+
+$("#addQuestion").on( "click", function() {
+    $("#modalQuestionQuizId").val($(this).data("quizid")); 
+  });

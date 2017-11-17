@@ -2,12 +2,11 @@
         <div class="p-4 mb-4 w-100">
                 <div class="card p-2">
                     <div class="d-flex justify-content-start">
-                    {{dbQuiz.dataValues}}
-
                             <button type="submit" class="btn btn-outline-primary" 
-                            data-toggle="modal" data-target="#addQuestion">Add Questions</button>
+                            data-toggle="modal" data-target="#modalQuestion" data-quizid={{quizId}} id="addQuestion">Add Questions</button>
 
                           <form action="/deleteQuiz" method="POST">
+                            <input type="hidden" name="userId" value="{{userId}}">
                             <input type="hidden" name="quizId" value="{{quizId}}">
                             <button type="submit" class="btn btn-outline-danger w-100">Delete</button> 
                           </form>   

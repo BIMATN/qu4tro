@@ -52,10 +52,21 @@ module.exports = function(app) {
             db.Quiz.findAll({ // pass back Quiz info to edit/delete
               where:query
             }).then(function(data) {
-              res.render("cms",{dbQuiz:data, loginError: "No questions to edit.", editQuestions:true, quiz_name:data[0].quiz_name, quizId:data[0].id});
+              res.render("cms",{
+                dbQuiz:data, 
+                loginError: "No questions to edit.", 
+                editQuestions:true, 
+                quiz_name:data[0].quiz_name, 
+                userId: data[0].UserId, 
+                quizId:data[0].id});
             });
           } else{   
-            res.render("cms",{dbQuestion: data, quiz_name:data[0].Quiz.quiz_name, quizId: data[0].Quiz.id, editQuestions:true});
+            res.render("cms",{
+              dbQuestion: data, 
+              quiz_name:data[0].Quiz.quiz_name, 
+              quizId: data[0].Quiz.id,
+              userId: data[0].Quiz.UserId, 
+              editQuestions:true});
           }
         });
     }
@@ -185,11 +196,8 @@ module.exports = function(app) {
     }
   });
 
-  // route for making a new quiz, works with user id and quiz name
+  // POST route for making a new question, requires quizID, question and answer
   app.post("/addQA", function(req, res) {
-    console.log("***:" + req.body.quizId);
-    console.log("***:" + req.body.question);
-    console.log("***:" + req.body.answer);
             
     if (req.body.quizId  && req.body.question && req.body.answer) {
       db.Question.create({
@@ -197,7 +205,30 @@ module.exports = function(app) {
       Question: req.body.question,
       Answer:req.body.answer
       }).then(function(data) {
-        res.render("cms", {successMessage:"question added to quiz", addAnotherQuestion:true, quizId: req.body.quizId});
+
+        db.Question.findAll({
+          where:{QuizId: parseInt(req.body.quizId)},
+          include: [db.Quiz]
+        }).then(function(data) {
+          console.log("data : " + JSON.stringify(data));     
+          if (!data || !data.length){
+            query = { id : decryptedString};
+            db.Quiz.findAll({ // pass back Quiz info to edit/delete
+              where:query
+            }).then(function(data) {
+              res.render("cms",{dbQuiz:data, loginError: "No questions to edit.", editQuestions:true, quiz_name:data[0].quiz_name, quizId:data[0].id});
+            });
+          } else{   
+            res.render("cms",{
+
+              dbQuestion: data, 
+              quiz_name:data[0].Quiz.quiz_name, 
+              quizId: data[0].Quiz.id, 
+              editQuestions:true,
+              successMessage:"question added to quiz"});
+          }
+        });
+
       });
     } else{
       res.render("cms", {errorMessage: "Please try again. A quiz name and its answer are required."});
@@ -331,8 +362,28 @@ module.exports = function(app) {
         id: req.body.questionId
       }
     }).then(function(destroyed) {
-      console.log("*** destroyed:" + destroyed);
-      res.render("cms", {successMessage:"Question deleted"});
+        db.Question.findAll(
+          {
+            where: {QuizId:req.body.quizId},
+            include: [db.Quiz]
+          }).then(function(dbQuestion) {
+            if (dbQuestion.length>0){
+            res.render("cms", {
+              successMessage:"Question deleted for Quiz ID:" + req.body.quizId, 
+              dbQuestion:dbQuestion, 
+              quiz_name: dbQuestion[0].Quiz.quiz_name,
+              quizId:req.body.quizId, 
+              editQuestions:true});     
+            } else {
+            res.render("cms", {
+              errorMessage:"Question deleted for Quiz ID:" + req.body.quizId, 
+              loginError: "No questions to edit.",               
+              quiz_name: req.body.quiz_name,
+              userId:req.body.userId,
+              quizId:req.body.quizId, 
+              editQuestions:true});   
+            }
+          });
     });
 
   });
@@ -345,19 +396,15 @@ module.exports = function(app) {
               id: req.body.quizId
             }
           }).then(function(destroyed) {
-
-              var query = {};
-              if (req.params.id) {
-                query.id = req.body.id;
-              }
-
+              console.log("entered here");
               db.Quiz.findAll({
-                where: query,
+                where: {UserId:req.body.userId},
                 include: [db.User]
               }).then(function(quizResponse) {
                 res.render("cms", {
                   successMessage:"Quiz ID:" + req.body.quizId + " deleted.", 
-                  quizzes: quizResponse, viewQuiz:true});
+                  quizzes: quizResponse, 
+                  viewQuiz:true});
               });
           });
 

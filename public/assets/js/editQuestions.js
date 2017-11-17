@@ -14,3 +14,7 @@ $(".editQuizName").on( "click", function() {
 
     $("#editModalQuizName").val(quiz_name); 
   });
+$("#addQuestion").on( "click", function() {
+    $("#modalQuestionQuizId").val($(this).data("quizid")); 
+  });
+
