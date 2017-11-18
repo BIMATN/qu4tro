@@ -1,42 +1,10 @@
-<div class="jumbotron mt-4 bg-info">
-  <div class="d-flex justify-content-center align-items-center">
-    <img class="logo" src = "/assets/img/quatro_logo.png">
-  </div>
-  <p class="lead text-center">You've Got Questions... And You've Got Answers</p>
-  <hr class="my-4">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/survey">Take A Survey</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Take A Quiz</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/apiInfo">API Information</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-12 d-flex justify-content-center">
       <div class="card text-white bg-info mb-3 w-50 mx-auto">
         <div class="card-header text-center">Register to Build Your Own Quizzes!</div>
         <div class="card-body text-center">
-          <h4 id="nameTarget" class="card-title">{{quizName}}</h4>
-          <div id="questions"></div>
+
           <form id="register" action="/register" method="POST">
             <div class="form-group col-12 mx-auto">
               <label for="question"><h2>QU4TRO Time!</h2></label>
@@ -51,8 +19,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
           </form>
-        </div>
-      </div>
+
     </div>
   </div>
 </div> <!-- Container -->

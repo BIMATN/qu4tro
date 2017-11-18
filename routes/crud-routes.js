@@ -27,8 +27,12 @@ module.exports = function(app) {
         });
     // res.json(quizResponse);
       else
-        res.render("cms", {
-          errorMessage:"No Quizzes for " + quizResponse[0].User.user_name
+        db.User.findAll({
+          where: {id : req.body.userId}
+        }).then(function(dbUser) {
+          res.render("cms", {
+            errorMessage:"No Quizzes for " + dbUser[0].user_name
+          });
         });
     });
   });
