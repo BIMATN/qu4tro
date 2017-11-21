@@ -1,2 +1,5 @@
-quatro is a new way to make tests, administer tests, and review tests
-You can even use it on your own website with our unique API
+###Quatro
+----------
+Build quizzes online
+Administer quizzes online
+Use your quiz on your very own website with our API
